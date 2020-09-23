@@ -19,10 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Return resource collection">
+    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/spa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/spa.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +182,7 @@
       <workItem from="1600774024839" duration="600000" />
       <workItem from="1600852297455" duration="9292000" />
       <workItem from="1600862899665" duration="1256000" />
-      <workItem from="1600864534256" duration="4272000" />
+      <workItem from="1600864534256" duration="6181000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -228,7 +226,28 @@
       <option name="project" value="LOCAL" />
       <updated>1600867952418</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Redirect if success">
+      <created>1600868910687</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1600868910687</updated>
+    </task>
+    <task id="LOCAL-00008" summary="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Code Style">
+      <created>1600868930770</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1600868930770</updated>
+    </task>
+    <task id="LOCAL-00009" summary="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page">
+      <created>1600870535679</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1600870535679</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +272,10 @@
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Returning json instead of redirect for store and update methods" />
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Code style" />
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Return resource collection" />
-    <option name="LAST_COMMIT_MESSAGE" value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Return resource collection" />
+    <MESSAGE value="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Redirect if success" />
+    <MESSAGE value="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Code Style" />
+    <MESSAGE value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page" />
+    <option name="LAST_COMMIT_MESSAGE" value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2663" y="288" width="424" height="478" key="FileChooserDialogImpl" timestamp="1600853671027">

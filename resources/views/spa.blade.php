@@ -108,7 +108,7 @@
                     '<p>' + product.price + '</p>',
                     '</div>',
                     '<div class="col-md-3">',
-                    '<form action="/' + config.routes.products + '/'+ product.id + '" class="delete-product">',
+                    '<form action="' + config.routes.products + '/'+ product.id + '" class="delete-product">',
                     '<input type="hidden" name="_method" value="DELETE">',
                     '<input type="submit" class="btn btn-danger" value="' + trans('Delete') + '">',
                     '</form>',
