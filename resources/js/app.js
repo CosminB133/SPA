@@ -66,7 +66,7 @@ $(document).ready(function () {
             url: config.routes.login,
             type : 'POST',
             dataType : 'json',
-            data : new FormData(this)
+            data : new FormData(this),
             success : (response) => {
                 window.location.hash = '#products';
             },
