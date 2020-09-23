@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Product;
 use Validator;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('products.index', ['products' => $products]);
+        return ProductResource::collection($products);
     }
 
     public function create()
