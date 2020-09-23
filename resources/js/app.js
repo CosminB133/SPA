@@ -51,7 +51,7 @@ $(document).ready(function () {
     $(document).on('submit','form#checkout',function(event){
         event.preventDefault();
         $.ajax({
-            url: config.routes.orders,
+            url: $(this).attr('action'),
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
@@ -69,7 +69,7 @@ $(document).ready(function () {
     $(document).on('submit','form#login',function(event){
         event.preventDefault();
         $.ajax({
-            url: config.routes.login,
+            url: $(this).attr('action'),
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
@@ -89,7 +89,7 @@ $(document).ready(function () {
         event.preventDefault();
         console.log(new FormData(this));
         $.ajax({
-            url: config.routes.products,
+            url: $(this).attr('action'),
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
@@ -97,6 +97,44 @@ $(document).ready(function () {
             contentType: false,
             success : (response) => {
                 window.location.hash = '#products';
+            },
+            error : (xhr,status,error) => {
+                renderErrors(xhr.responseJSON.errors);
+            }
+        })
+    });
+
+    $(document).on('submit','form#new-product',function(event){
+        event.preventDefault();
+        console.log(new FormData(this));
+        $.ajax({
+            url: $(this).attr('action'),
+            type : 'POST',
+            dataType : 'json',
+            data : new FormData(this),
+            processData: false,
+            contentType: false,
+            success : (response) => {
+                window.location.hash = '#products';
+            },
+            error : (xhr,status,error) => {
+                renderErrors(xhr.responseJSON.errors);
+            }
+        })
+    });
+
+    $(document).on('submit','form.delete-product',function(event){
+        event.preventDefault();
+        console.log(new FormData(this));
+        $.ajax({
+            url: $(this).attr('action'),
+            type : 'POST',
+            dataType : 'json',
+            data : new FormData(this),
+            processData: false,
+            contentType: false,
+            success : (response) => {
+                this.parentNode.parentNode.remove();
             },
             error : (xhr,status,error) => {
                 renderErrors(xhr.responseJSON.errors);

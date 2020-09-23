@@ -37313,7 +37313,7 @@ $(document).ready(function () {
   $(document).on('submit', 'form#checkout', function (event) {
     event.preventDefault();
     $.ajax({
-      url: config.routes.orders,
+      url: $(this).attr('action'),
       type: 'POST',
       dataType: 'json',
       data: new FormData(this),
@@ -37330,7 +37330,7 @@ $(document).ready(function () {
   $(document).on('submit', 'form#login', function (event) {
     event.preventDefault();
     $.ajax({
-      url: config.routes.login,
+      url: $(this).attr('action'),
       type: 'POST',
       dataType: 'json',
       data: new FormData(this),
@@ -37349,7 +37349,7 @@ $(document).ready(function () {
     event.preventDefault();
     console.log(new FormData(this));
     $.ajax({
-      url: config.routes.products,
+      url: $(this).attr('action'),
       type: 'POST',
       dataType: 'json',
       data: new FormData(this),
@@ -37359,6 +37359,44 @@ $(document).ready(function () {
         window.location.hash = '#products';
       },
       error: function error(xhr, status, _error3) {
+        renderErrors(xhr.responseJSON.errors);
+      }
+    });
+  });
+  $(document).on('submit', 'form#new-product', function (event) {
+    event.preventDefault();
+    console.log(new FormData(this));
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function success(response) {
+        window.location.hash = '#products';
+      },
+      error: function error(xhr, status, _error4) {
+        renderErrors(xhr.responseJSON.errors);
+      }
+    });
+  });
+  $(document).on('submit', 'form.delete-product', function (event) {
+    var _this3 = this;
+
+    event.preventDefault();
+    console.log(new FormData(this));
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function success(response) {
+        _this3.parentNode.parentNode.remove();
+      },
+      error: function error(xhr, status, _error5) {
         renderErrors(xhr.responseJSON.errors);
       }
     });
