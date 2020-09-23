@@ -24,7 +24,7 @@ $(document).ready(function () {
             url: config.routes.cart,
             type : 'POST',
             dataType : 'json',
-            data : $(this).serialize(),
+            data : new FormData(this),
             success : () => {
                 this.parentNode.parentNode.remove();
             }
@@ -37,7 +37,7 @@ $(document).ready(function () {
             url: config.routes.cart,
             type : 'POST',
             dataType : 'json',
-            data : $(this).serialize(),
+            data : new FormData(this),
             success : () => {
                 this.parentNode.parentNode.remove();
             }
@@ -50,7 +50,7 @@ $(document).ready(function () {
             url: config.routes.orders,
             type : 'POST',
             dataType : 'json',
-            data : $(this).serialize(),
+            data : new FormData(this),
             success : (response) => {
                 window.location.hash = '#';
             },
@@ -66,7 +66,7 @@ $(document).ready(function () {
             url: config.routes.login,
             type : 'POST',
             dataType : 'json',
-            data : $(this).serialize(),
+            data : new FormData(this)
             success : (response) => {
                 window.location.hash = '#products';
             },
@@ -78,17 +78,12 @@ $(document).ready(function () {
     });
 
     $(document).on('submit','form#new_product',function(event){
-        event.preventDefault();
-
-        let fd = new FormData();
-        let files = $('#file')[0].files[0];
-        fd.append('file',files);
-
+        event.preventDefault()
         $.ajax({
             url: config.routes.products,
             type : 'POST',
             dataType : 'json',
-            data : $(this).serialize(),
+            data : new FormData(this),
             success : (response) => {
                 alert('ceva2');
             },
@@ -121,7 +116,7 @@ $(document).ready(function () {
             case '#products':
                 $('.products').show();
                 $.ajax({
-                    url: '/products',
+                    url: config.routes.cart,
                     dataType: 'json',
                     success: function (response) {
                         $('.cart .list').html(renderListCart(response['data']));
