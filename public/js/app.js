@@ -37302,9 +37302,9 @@ $(document).ready(function () {
       url: config.routes.cart,
       type: 'POST',
       dataType: 'json',
+      data: new FormData(this),
       processData: false,
       contentType: false,
-      data: new FormData(this),
       success: function success() {
         _this2.parentNode.parentNode.remove();
       }
