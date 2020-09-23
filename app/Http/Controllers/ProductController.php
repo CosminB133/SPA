@@ -38,7 +38,7 @@ class ProductController extends Controller
         $path = public_path() . '/img/';
         $request->file('img')->move($path, $product->id);
 
-        return redirect()->route('products');
+        return response()->json(['message' => 'Success']);
     }
 
 
@@ -57,12 +57,12 @@ class ProductController extends Controller
 
         $request->img->move(public_path() . '/img/', $product->id);
 
-        return redirect()->route('products');
+        return response()->json(['message' => 'Success']);
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products');
+        return response()->json(['message' => 'Success']);
     }
 }
