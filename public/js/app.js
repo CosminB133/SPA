@@ -37273,7 +37273,7 @@ $.ajaxSetup({
 });
 $(document).ready(function () {
   $('[data-translate]').each(function () {
-    $(this).text('sadas');
+    $(this).text(trans($(this).text()));
   });
   $('input[type = "submit"]').each(function () {
     $(this).attr('value', trans($(this).attr('value')));
@@ -37286,7 +37286,9 @@ $(document).ready(function () {
       url: config.routes.cart,
       type: 'POST',
       dataType: 'json',
-      data: $(this).serialize(),
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
       success: function success() {
         _this.parentNode.parentNode.remove();
       }
@@ -37300,7 +37302,9 @@ $(document).ready(function () {
       url: config.routes.cart,
       type: 'POST',
       dataType: 'json',
-      data: $(this).serialize(),
+      processData: false,
+      contentType: false,
+      data: new FormData(this),
       success: function success() {
         _this2.parentNode.parentNode.remove();
       }
@@ -37312,7 +37316,9 @@ $(document).ready(function () {
       url: config.routes.orders,
       type: 'POST',
       dataType: 'json',
-      data: $(this).serialize(),
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
       success: function success(response) {
         window.location.hash = '#';
       },
@@ -37327,7 +37333,9 @@ $(document).ready(function () {
       url: config.routes.login,
       type: 'POST',
       dataType: 'json',
-      data: $(this).serialize(),
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
       success: function success(response) {
         window.location.hash = '#products';
       },
@@ -37339,14 +37347,14 @@ $(document).ready(function () {
   });
   $(document).on('submit', 'form#new_product', function (event) {
     event.preventDefault();
-    var fd = new FormData();
-    var files = $('#file')[0].files[0];
-    fd.append('file', files);
+    console.log(new FormData(this));
     $.ajax({
       url: config.routes.products,
       type: 'POST',
       dataType: 'json',
-      data: $(this).serialize(),
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
       success: function success(response) {
         alert('ceva2');
       },
@@ -37365,7 +37373,7 @@ $(document).ready(function () {
       case '#cart':
         $('.cart').show();
         $.ajax({
-          url: '/cart',
+          url: config.routes.cart,
           dataType: 'json',
           success: function success(response) {
             $('.cart .list').html(renderListCart(response['data']));
@@ -37380,7 +37388,7 @@ $(document).ready(function () {
       case '#products':
         $('.products').show();
         $.ajax({
-          url: '/products',
+          url: config.routes.products,
           dataType: 'json',
           success: function success(response) {
             $('.cart .list').html(renderListCart(response['data']));

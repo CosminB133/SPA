@@ -25,6 +25,8 @@ $(document).ready(function () {
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
+            processData: false,
+            contentType: false,
             success : () => {
                 this.parentNode.parentNode.remove();
             }
@@ -37,6 +39,8 @@ $(document).ready(function () {
             url: config.routes.cart,
             type : 'POST',
             dataType : 'json',
+            processData: false,
+            contentType: false,
             data : new FormData(this),
             success : () => {
                 this.parentNode.parentNode.remove();
@@ -51,6 +55,8 @@ $(document).ready(function () {
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
+            processData: false,
+            contentType: false,
             success : (response) => {
                 window.location.hash = '#';
             },
@@ -67,6 +73,8 @@ $(document).ready(function () {
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
+            processData: false,
+            contentType: false,
             success : (response) => {
                 window.location.hash = '#products';
             },
@@ -78,12 +86,15 @@ $(document).ready(function () {
     });
 
     $(document).on('submit','form#new_product',function(event){
-        event.preventDefault()
+        event.preventDefault();
+        console.log(new FormData(this));
         $.ajax({
             url: config.routes.products,
             type : 'POST',
             dataType : 'json',
             data : new FormData(this),
+            processData: false,
+            contentType: false,
             success : (response) => {
                 alert('ceva2');
             },
@@ -103,7 +114,7 @@ $(document).ready(function () {
             case '#cart':
                 $('.cart').show();
                 $.ajax({
-                    url: '/cart',
+                    url: config.routes.cart,
                     dataType: 'json',
                     success: function (response) {
                         $('.cart .list').html(renderListCart(response['data']));
@@ -116,7 +127,7 @@ $(document).ready(function () {
             case '#products':
                 $('.products').show();
                 $.ajax({
-                    url: config.routes.cart,
+                    url: config.routes.products,
                     dataType: 'json',
                     success: function (response) {
                         $('.cart .list').html(renderListCart(response['data']));
