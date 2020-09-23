@@ -85,7 +85,7 @@ $(document).ready(function () {
         })
     });
 
-    $(document).on('submit','form#new_product',function(event){
+    $(document).on('submit','form#new-product',function(event){
         event.preventDefault();
         console.log(new FormData(this));
         $.ajax({
@@ -96,10 +96,9 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success : (response) => {
-                alert('ceva2');
+                window.location.hash = '#products';
             },
             error : (xhr,status,error) => {
-                alert('ceva');
                 renderErrors(xhr.responseJSON.errors);
             }
         })
@@ -130,7 +129,7 @@ $(document).ready(function () {
                     url: config.routes.products,
                     dataType: 'json',
                     success: function (response) {
-                        $('.cart .list').html(renderListCart(response['data']));
+                        $('.products .list').html(renderListProducts(response['data']));
                     }
                 });
                 break;
