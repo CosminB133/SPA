@@ -37286,7 +37286,7 @@ $(document).ready(function () {
 
     event.preventDefault();
     $.ajax({
-      url: config.routes.cart,
+      url: $(this).attr('action'),
       type: 'POST',
       dataType: 'json',
       data: new FormData(this),
@@ -37302,7 +37302,7 @@ $(document).ready(function () {
 
     event.preventDefault();
     $.ajax({
-      url: config.routes.cart,
+      url: $(this).attr('action'),
       type: 'POST',
       dataType: 'json',
       data: new FormData(this),
@@ -37348,29 +37348,10 @@ $(document).ready(function () {
       }
     });
   });
-  $(document).on('submit', 'form#new-product', function (event) {
-    event.preventDefault();
-    console.log(new FormData(this));
-    $.ajax({
-      url: $(this).attr('action'),
-      type: 'POST',
-      dataType: 'json',
-      data: new FormData(this),
-      processData: false,
-      contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error3) {
-        renderErrors(xhr.responseJSON.errors);
-      }
-    });
-  });
   $(document).on('submit', 'form.delete-product', function (event) {
     var _this3 = this;
 
     event.preventDefault();
-    console.log(new FormData(this));
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
@@ -37381,14 +37362,30 @@ $(document).ready(function () {
       success: function success(response) {
         _this3.parentNode.parentNode.remove();
       },
-      error: function error(xhr, status, _error4) {
+      error: function error(xhr, status, _error3) {
         renderErrors(xhr.responseJSON.errors);
       }
     });
   });
   $(document).on('submit', 'form#product-new', function (event) {
     event.preventDefault();
-    console.log(new FormData(this));
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function success(response) {
+        window.location.hash = '#products';
+      },
+      error: function error(xhr, status, _error4) {
+        renderErrors(xhr.responseJSON.errors);
+      }
+    });
+  });
+  $(document).on('submit', 'form#product-edit', function (event) {
+    event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
@@ -37400,24 +37397,6 @@ $(document).ready(function () {
         window.location.hash = '#products';
       },
       error: function error(xhr, status, _error5) {
-        renderErrors(xhr.responseJSON.errors);
-      }
-    });
-  });
-  $(document).on('submit', 'form#product-edit', function (event) {
-    event.preventDefault();
-    console.log(new FormData(this));
-    $.ajax({
-      url: $(this).attr('action'),
-      type: 'POST',
-      dataType: 'json',
-      data: new FormData(this),
-      processData: false,
-      contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error6) {
         renderErrors(xhr.responseJSON.errors);
       }
     });
@@ -37467,6 +37446,30 @@ $(document).ready(function () {
           dataType: 'json',
           success: function success(response) {
             $('.product-edit').html(renderProductEdit(response.data));
+          }
+        });
+        break;
+
+      case hash === '#orders':
+        $('.orders').show();
+        $.ajax({
+          url: config.routes.orders,
+          dataType: 'json',
+          success: function success(response) {
+            $('.orders .list').html(renderListOrders(response.data));
+          }
+        });
+        break;
+
+      case hash.match(/#orders\/[1-9]+[0-9]*/i) !== null:
+        $('.order').show();
+        orderId = hash.match(/#orders\/([1-9]+[0-9]*)/i)[1];
+        $.ajax({
+          url: config.routes.orders + '/' + orderId,
+          dataType: 'json',
+          success: function success(response) {
+            console.log(response);
+            renderOrder(response.data);
           }
         });
         break;

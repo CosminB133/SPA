@@ -121,13 +121,61 @@
             return html;
         }
 
-
         function renderProductEdit(product) {
             $('#title-product-edit').attr('value', product.title);
             $('#description-product-edit').text(product.description);
             $('#price-product-edit').attr('value', product.price);
             $('form#product-edit').attr('action', config.routes.products + '/' + product.id);
         }
+
+        function renderListOrders(orders) {
+            html = '';
+
+            $.each(orders, function (key, order) {
+                html += [
+                    '<div class="card" style="margin: 10px">',
+                    '<h1 class="card-header">' + order.name + '</h1>',
+                    '<div class="card-body">',
+                    '<p>' + trans('Contact details') + ':' + order.contact + '</p>',
+                    '<p>' + trans('Comments') + ':' + order.comments + '</p>',
+                    '<p>'+ trans('Order price:') + ':' + order.price + '</p>',
+                    '<p>' + trans('Made at') + ':'  + order.created_at + '</p>',
+                    '<a href="#orders/' + order.id + '" class="btn btn-primary">' + trans('Show') + '</a>',
+                    '</div>',
+                    '</div>',
+                ].join('');
+            });
+
+            return html;
+        }
+
+        function renderOrder(order) {
+            console.log(order)
+            $('#name-order').text(order.name);
+            $('#contact-order').text(order.contact);
+            $('#comments-order').text(order.comments);
+            $('#price-order').text(order.price);
+            $('#crated-order').text(order.created_at);
+
+            html = '';
+
+            $.each(order.products, function (key, product) {
+                html += [
+                    '<div class="row" style="margin: 10px">',
+                    '<div class="col-md-3">',
+                    '<img src="/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '</div>',
+                    '<div class="col-md-9">',
+                    '<h4>' + product.title + '</h4>',
+                    '<p>' + product.description + '</p>',
+                    '<p>' + product.price + '</p>',
+                    '</div>',
+                    '</div>',
+                ].join('');
+            });
+            $('.order .list').html(html);
+        }
+
     </script>
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -239,6 +287,32 @@
             <input type="submit" class="btn btn-primary" value="Update">
         </form>
         <div class="reviews"></div>
+    </div>
+
+    <div class="page orders">
+        <div class="list"></div>
+    </div>
+
+    <div class="page order">
+        <div class="card">
+            <h1 class="card-header" id="name-order"></h1>
+            <div class="card-body">
+                <p data-translate>Contact details :</p>
+                <p id="contact-order"></p>
+
+                <p data-translate>Comments:</p>
+                <p id="comments-order"></p>
+
+                <p data-translate>Order price:</p>
+                <p id="price-order"></p>
+
+                <p data-translate>Made at: </p>
+                <p id="crated-order"></p>
+            </div>
+        </div>
+
+
+        <div class="list"></div>
     </div>
 
 </div>

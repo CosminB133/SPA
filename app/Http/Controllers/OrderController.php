@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Mail\OrderEmail;
 use App\Order;
 use http\Env\Response;
@@ -16,8 +17,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-
-        return view('orders.index', ['orders' => $orders]);
+        return OrderResource::collection($orders);
     }
 
     public function store(Request $request)
@@ -60,7 +60,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $products = $order->products;
-
-        return view('orders.show', ['order' => $order, 'products' => $products]);
+        $response = new OrderResource($order);
+        $response->setProducts($products);
+        return $response;
     }
 }
