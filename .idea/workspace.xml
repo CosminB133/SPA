@@ -19,8 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page">
+    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Added delete functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/spa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/spa.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +184,8 @@
       <workItem from="1600774024839" duration="600000" />
       <workItem from="1600852297455" duration="9292000" />
       <workItem from="1600862899665" duration="1256000" />
-      <workItem from="1600864534256" duration="6181000" />
+      <workItem from="1600864534256" duration="7904000" />
+      <workItem from="1600936516004" duration="3376000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -247,7 +250,21 @@
       <option name="project" value="LOCAL" />
       <updated>1600870535679</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Added delete functionality">
+      <created>1600870842607</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1600870842607</updated>
+    </task>
+    <task id="LOCAL-00011" summary="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Added delete functionality">
+      <created>1600870888003</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1600870888003</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +280,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -272,10 +290,11 @@
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Returning json instead of redirect for store and update methods" />
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Code style" />
     <MESSAGE value="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Return resource collection" />
-    <MESSAGE value="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Redirect if success" />
-    <MESSAGE value="#24: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/24 Code Style" />
+    <MESSAGE value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Redirect if success" />
+    <MESSAGE value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Code Style" />
     <MESSAGE value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page" />
-    <option name="LAST_COMMIT_MESSAGE" value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Used action atribut for getting the path and added render for products page" />
+    <MESSAGE value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Added delete functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="#22: Products http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/22 Added delete functionality" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2663" y="288" width="424" height="478" key="FileChooserDialogImpl" timestamp="1600853671027">
@@ -284,14 +303,22 @@
     <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600339669008" />
     <state x="1072" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.3840.1040@0.0.3840.1040" timestamp="1600764705201" />
     <state x="2663" y="288" width="424" height="478" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600853671027" />
+    <state x="2361" y="424" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog" timestamp="1600872410000">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2361" y="424" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600872410000" />
+    <state x="2475" y="255" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600872434444">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2475" y="255" width="800" height="522" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600872434444" />
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600165171985">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600165171985" />
-    <state x="145" y="0" width="1695" height="817" maximized="true" key="dock-window-1" timestamp="1600680114984">
+    <state x="0" y="103" width="1512" height="776" maximized="true" key="dock-window-1" timestamp="1600939893517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="145" y="0" width="1695" height="817" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600680114984" />
+    <state x="0" y="103" width="1512" height="776" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600939893517" />
     <state x="2145" y="286" width="1695" height="754" key="dock-window-2" timestamp="1600686415577">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

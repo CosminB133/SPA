@@ -37405,9 +37405,11 @@ $(document).ready(function () {
   window.onhashchange = function () {
     $('.page').hide();
     $('#errors').html('');
+    hash = window.location.hash;
+    console.log(hash.match(/#products\/([1-9]+[0-9]*)\/edit/i));
 
-    switch (window.location.hash) {
-      case '#cart':
+    switch (true) {
+      case hash === '#cart':
         $('.cart').show();
         $.ajax({
           url: config.routes.cart,
@@ -37418,11 +37420,11 @@ $(document).ready(function () {
         });
         break;
 
-      case '#login':
+      case hash === '#login':
         $('.login').show();
         break;
 
-      case '#products':
+      case hash === '#products':
         $('.products').show();
         $.ajax({
           url: config.routes.products,
@@ -37433,8 +37435,22 @@ $(document).ready(function () {
         });
         break;
 
-      case '#products/create':
+      case hash === '#products/create':
         $('.product_new').show();
+        break;
+
+      case hash.match(/#products\/([1-9]+[0-9]*)\/edit/i) !== null:
+        productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i);
+        $.ajax({
+          url: config.routes.products + productId + '/edit',
+          dataType: 'json',
+          success: function success(response) {
+            alert('response');
+          },
+          error: function error(xhr, status, _error6) {
+            alert('nu');
+          }
+        });
         break;
 
       default:

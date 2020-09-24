@@ -147,8 +147,12 @@ $(document).ready(function () {
 
         $('#errors').html('');
 
-        switch(window.location.hash) {
-            case '#cart':
+        hash = window.location.hash;
+
+        console.log(hash.match(/#products\/([1-9]+[0-9]*)\/edit/i));
+
+        switch(true) {
+            case hash === '#cart':
                 $('.cart').show();
                 $.ajax({
                     url: config.routes.cart,
@@ -158,10 +162,10 @@ $(document).ready(function () {
                     }
                 });
                 break;
-            case '#login':
+            case hash === '#login':
                 $('.login').show();
                 break;
-            case '#products':
+            case hash === '#products':
                 $('.products').show();
                 $.ajax({
                     url: config.routes.products,
@@ -169,10 +173,24 @@ $(document).ready(function () {
                     success: function (response) {
                         $('.products .list').html(renderListProducts(response['data']));
                     }
+
                 });
                 break;
-            case '#products/create':
+            case hash === '#products/create':
                 $('.product_new').show();
+                break;
+            case hash.match(/#products\/([1-9]+[0-9]*)\/edit/i) !== null :
+                productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i);
+                $.ajax({
+                    url: config.routes.products + productId + '/edit',
+                    dataType: 'json',
+                    success: function (response) {
+                        alert('response');
+                    },
+                    error : (xhr,status,error) => {
+                        alert('nu');
+                    }
+                });
                 break;
             default:
                 $('.index').show();
@@ -183,8 +201,10 @@ $(document).ready(function () {
                     }
                 });
                 break;
-        }
-    }
+
+
+
+    }}
 
     window.onhashchange();
 })

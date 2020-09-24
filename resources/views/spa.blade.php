@@ -119,6 +119,36 @@
 
             return html;
         }
+
+
+        function renderProductEdit(product) {
+
+            html = [
+                '<h1 data-translate>' + trans('Edit Product') + '</h1>',
+                '<form action="" method="post" enctype="multipart/form-data">',
+                '<input type="hidden" name="_method" value="PATCH">',
+                '<div class="form-group">',
+                '<label for="title">' + trans('Title') + '</label>',
+                '<input type="text" name="title" id="title" class="form-control" value="' + product.title + '">',
+                '</div>',
+                '<div class="form-group">',
+                '<label for="description">' + trans('Description')  + '</label>',
+                '<textarea name="description" id="description" cols="30" rows="10" class="form-control">' +  product.description + '</textarea>',
+                '</div>',
+                '<div class="form-group">',
+                '<label for="price">' + trans('Price')  + '</label>',
+                '<input type="text" name="price" id="price" class="form-control" value="' + product.price + '">',
+                '</div>',
+                '<div class="form-group">',
+                '<label for="img">' + trans('Image') + '</label>',
+                '<input type="file" name="img" id="img" class="form-control-file">',
+                '</div>',
+                '<input type="submit" class="btn btn-primary" value="' + trans('Submit') + '">',
+                '</form>',
+            ].join('');
+
+            return html;
+        }
     </script>
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -206,6 +236,33 @@
 
             <input type="submit" class="btn btn-primary" value="Create">
         </form>
+    </div>
+    <div class="page product-edit">
+        <h1 data-translate>Edit Product</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="DELETE">
+            <div class="form-group">
+                <label for="title">{{ __('Title') }}</label>
+                <input type="text" name="title" id="title" class="form-control" value="{{ $product['title'] }}">
+            </div>
+            <div class="form-group">
+                <label for="description">{{ __('Description') }}</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                          class="form-control">{{ $product['description'] }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">{{ __('Price') }}</label>
+                <input type="text" name="price" id="price" class="form-control" value="{{ $product['price'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img">{{ __('Image') }}</label>
+                <input type="file" name="img" id="img" class="form-control-file">
+            </div>
+            <input type="submit" class="btn btn-primary" value="{{ __('Submit') }}">
+        </form>
+
+        <div class="reviews"></div>
+
     </div>
 
 </div>
