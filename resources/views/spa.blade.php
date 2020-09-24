@@ -122,33 +122,9 @@
 
 
         function renderProductEdit(product) {
-
-            html = [
-                '<h1 data-translate>' + trans('Edit Product') + '</h1>',
-                '<form action="" method="post" enctype="multipart/form-data">',
-                '<input type="hidden" name="_method" value="PATCH">',
-                '<div class="form-group">',
-                '<label for="title">' + trans('Title') + '</label>',
-                '<input type="text" name="title" id="title" class="form-control" value="' + product.title + '">',
-                '</div>',
-                '<div class="form-group">',
-                '<label for="description">' + trans('Description')  + '</label>',
-                '<textarea name="description" id="description" cols="30" rows="10" class="form-control">' +  product.description + '</textarea>',
-                '</div>',
-                '<div class="form-group">',
-                '<label for="price">' + trans('Price')  + '</label>',
-                '<input type="text" name="price" id="price" class="form-control" value="' + product.price + '">',
-                '</div>',
-                '<div class="form-group">',
-                '<label for="img">' + trans('Image') + '</label>',
-                '<input type="file" name="img" id="img" class="form-control-file">',
-                '</div>',
-                '<input type="submit" class="btn btn-primary" value="' + trans('Submit') + '">',
-                '</form>',
-                '<div class="reviews"></div>',
-        ].join('');
-
-            return html;
+            $('#title-product-edit').attr('value', product.title);
+            $('#description-product-edit').text(product.description);
+            $('#price-product-edit').attr('value', product.price);
         }
     </script>
 
@@ -239,7 +215,28 @@
         </form>
     </div>
     <div class="page product-edit">
-
+        <h1 data-translate>Edit Product</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PATCH">
+            <div class="form-group">
+                <label for="title-product-edit">Title</label>
+                <input type="text" name="title" id="title-product-edit" class="form-control">
+                </div>
+            <div class="form-group">
+                <label for="description-product-edit">Description</label>
+                <textarea name="description" id="description-product-edit" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            <div class="form-group">
+                <label for="price-product-edit"></label>
+                <input type="text" name="price" id="price-product-edit" class="form-control">
+                </div>
+            <div class="form-group">
+                <label for="img-product-edit" data-translate>Image</label>
+                <input type="file" name="img" id="img-product-edit" class="form-control-file">
+                </div>
+            <input type="submit" class="btn btn-primary" value="Update">
+            </form>
+        <div class="reviews"></div>
     </div>
 
 </div>

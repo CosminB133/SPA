@@ -188,9 +188,6 @@ $(document).ready(function () {
                     success: function (response) {
                         console.log(response.data)
                         $('.product-edit').html(renderProductEdit(response.data));
-                    },
-                    error : (xhr,status,error) => {
-                        alert('nu');
                     }
                 });
                 break;

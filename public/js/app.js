@@ -37447,9 +37447,6 @@ $(document).ready(function () {
           success: function success(response) {
             console.log(response.data);
             $('.product-edit').html(renderProductEdit(response.data));
-          },
-          error: function error(xhr, status, _error6) {
-            alert('nu');
           }
         });
         break;
