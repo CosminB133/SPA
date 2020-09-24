@@ -37441,7 +37441,6 @@ $(document).ready(function () {
       case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null:
         $('.product-edit').show();
         productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i)[1];
-        console.log(config.routes.products + '/' + productId + '/edit');
         $.ajax({
           url: config.routes.products + '/' + productId + '/edit',
           dataType: 'json',
