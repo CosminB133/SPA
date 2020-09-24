@@ -37406,7 +37406,6 @@ $(document).ready(function () {
     $('.page').hide();
     $('#errors').html('');
     hash = window.location.hash;
-    console.log(hash.match(/#products\/([1-9]+[0-9]*)\/edit/i));
 
     switch (true) {
       case hash === '#cart':
@@ -37415,7 +37414,7 @@ $(document).ready(function () {
           url: config.routes.cart,
           dataType: 'json',
           success: function success(response) {
-            $('.cart .list').html(renderListCart(response['data']));
+            $('.cart .list').html(renderListCart(response.data));
           }
         });
         break;
@@ -37430,22 +37429,25 @@ $(document).ready(function () {
           url: config.routes.products,
           dataType: 'json',
           success: function success(response) {
-            $('.products .list').html(renderListProducts(response['data']));
+            $('.products .list').html(renderListProducts(response.data));
           }
         });
         break;
 
       case hash === '#products/create':
-        $('.product_new').show();
+        $('.product-new').show();
         break;
 
-      case hash.match(/#products\/([1-9]+[0-9]*)\/edit/i) !== null:
-        productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i);
+      case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null:
+        $('.product-edit').show();
+        productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i)[1];
+        console.log(config.routes.products + '/' + productId + '/edit');
         $.ajax({
-          url: config.routes.products + productId + '/edit',
+          url: config.routes.products + '/' + productId + '/edit',
           dataType: 'json',
           success: function success(response) {
-            alert('response');
+            console.log(response.data);
+            $('.product-edit').html(renderProductEdit(response.data));
           },
           error: function error(xhr, status, _error6) {
             alert('nu');
@@ -37458,7 +37460,7 @@ $(document).ready(function () {
         $.ajax('/', {
           dataType: 'json',
           success: function success(response) {
-            $('.index .list').html(renderListIndex(response['data']));
+            $('.index .list').html(renderListIndex(response.data));
           }
         });
         break;

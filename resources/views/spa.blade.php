@@ -212,7 +212,7 @@
         <a href="#products/create" class="btn btn-primary">{{ __('New') }}</a>
     </div>
 
-    <div class="page product_new">
+    <div class="page product-new">
         <div class="list"></div>
         <h1 data-translate>Add Product</h1>
         <form id="new-product">

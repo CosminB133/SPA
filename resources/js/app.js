@@ -149,8 +149,6 @@ $(document).ready(function () {
 
         hash = window.location.hash;
 
-        console.log(hash.match(/#products\/([1-9]+[0-9]*)\/edit/i));
-
         switch(true) {
             case hash === '#cart':
                 $('.cart').show();
@@ -158,7 +156,7 @@ $(document).ready(function () {
                     url: config.routes.cart,
                     dataType: 'json',
                     success: function (response) {
-                        $('.cart .list').html(renderListCart(response['data']));
+                        $('.cart .list').html(renderListCart(response.data));
                     }
                 });
                 break;
@@ -171,21 +169,25 @@ $(document).ready(function () {
                     url: config.routes.products,
                     dataType: 'json',
                     success: function (response) {
-                        $('.products .list').html(renderListProducts(response['data']));
+                        $('.products .list').html(renderListProducts(response.data));
                     }
 
                 });
                 break;
             case hash === '#products/create':
-                $('.product_new').show();
+                $('.product-new').show();
                 break;
-            case hash.match(/#products\/([1-9]+[0-9]*)\/edit/i) !== null :
-                productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i);
+            case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null :
+                $('.product-edit').show();
+
+                productId = hash.match(/#products\/([1-9]+[0-9]*)\/edit/i)[1];
+
                 $.ajax({
-                    url: config.routes.products + productId + '/edit',
+                    url: config.routes.products + '/' + productId + '/edit',
                     dataType: 'json',
                     success: function (response) {
-                        alert('response');
+                        console.log(response.data)
+                        $('.product-edit').html(renderProductEdit(response.data));
                     },
                     error : (xhr,status,error) => {
                         alert('nu');
@@ -197,7 +199,7 @@ $(document).ready(function () {
                 $.ajax('/', {
                     dataType: 'json',
                     success: function (response) {
-                        $('.index .list').html(renderListIndex(response['data']));
+                        $('.index .list').html(renderListIndex(response.data));
                     }
                 });
                 break;
