@@ -37278,6 +37278,9 @@ $(document).ready(function () {
   $('input[type = "submit"]').each(function () {
     $(this).attr('value', trans($(this).attr('value')));
   });
+  $('form#login').attr('action', config.routes.login);
+  $('form#checkout').attr('action', config.routes.orders);
+  $('form#new-product').attr('action', config.routes.products);
   $(document).on('submit', 'form.add-cart', function (event) {
     var _this = this;
 
@@ -37363,24 +37366,6 @@ $(document).ready(function () {
       }
     });
   });
-  $(document).on('submit', 'form#new-product', function (event) {
-    event.preventDefault();
-    console.log(new FormData(this));
-    $.ajax({
-      url: $(this).attr('action'),
-      type: 'POST',
-      dataType: 'json',
-      data: new FormData(this),
-      processData: false,
-      contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error4) {
-        renderErrors(xhr.responseJSON.errors);
-      }
-    });
-  });
   $(document).on('submit', 'form.delete-product', function (event) {
     var _this3 = this;
 
@@ -37396,7 +37381,43 @@ $(document).ready(function () {
       success: function success(response) {
         _this3.parentNode.parentNode.remove();
       },
+      error: function error(xhr, status, _error4) {
+        renderErrors(xhr.responseJSON.errors);
+      }
+    });
+  });
+  $(document).on('submit', 'form#product-new', function (event) {
+    event.preventDefault();
+    console.log(new FormData(this));
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function success(response) {
+        window.location.hash = '#products';
+      },
       error: function error(xhr, status, _error5) {
+        renderErrors(xhr.responseJSON.errors);
+      }
+    });
+  });
+  $(document).on('submit', 'form#product-edit', function (event) {
+    event.preventDefault();
+    console.log(new FormData(this));
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      dataType: 'json',
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function success(response) {
+        window.location.hash = '#products';
+      },
+      error: function error(xhr, status, _error6) {
         renderErrors(xhr.responseJSON.errors);
       }
     });
@@ -37435,7 +37456,7 @@ $(document).ready(function () {
         break;
 
       case hash === '#products/create':
-        $('.product-new').show();
+        $('.new-product').show();
         break;
 
       case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null:
@@ -37445,7 +37466,6 @@ $(document).ready(function () {
           url: config.routes.products + '/' + productId + '/edit',
           dataType: 'json',
           success: function success(response) {
-            console.log(response.data);
             $('.product-edit').html(renderProductEdit(response.data));
           }
         });

@@ -108,6 +108,7 @@
                     '<p>' + product.price + '</p>',
                     '</div>',
                     '<div class="col-md-3">',
+                    '<a href="#products/' + product.id + '/edit" class="btn btn-primary">' + trans('Edit') + '</a>',
                     '<form action="' + config.routes.products + '/'+ product.id + '" class="delete-product">',
                     '<input type="hidden" name="_method" value="DELETE">',
                     '<input type="submit" class="btn btn-danger" value="' + trans('Delete') + '">',
@@ -125,6 +126,7 @@
             $('#title-product-edit').attr('value', product.title);
             $('#description-product-edit').text(product.description);
             $('#price-product-edit').attr('value', product.price);
+            $('form#product-edit').attr('action', config.routes.products + '/' + product.id);
         }
     </script>
 
@@ -185,30 +187,30 @@
 
     <div class="page products">
         <div class="list"></div>
-        <a href="#products/create" class="btn btn-primary">{{ __('New') }}</a>
+        <a href="#products/create" class="btn btn-primary" data-translate>New</a>
     </div>
 
-    <div class="page product-new">
+    <div class="page new-product">
         <div class="list"></div>
         <h1 data-translate>Add Product</h1>
         <form id="new-product">
             <div class="form-group">
                 <label for="title" data-translate> Title : </label>
-                <input type="text" name="title" id="title" class="form-control">
+                <input type="text" name="title" id="title-new-product" class="form-control">
             </div>
             <div class="form-group">
-                <label for="description" data-translate> Description </label>
-                <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="price"  data-translate> Price : </label>
-                <input type="text" name="price" id="price" class="form-control">
+                <label for="description-new-product" data-translate> Description </label>
+                <textarea name="description" id="description-new-product" cols="30" rows="10" class="form-control"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="img" data-translate> Image : </label>
-                <input type="file" name="img" id="img" class="form-control-file" >
+                <label for="price-new-product"  data-translate> Price : </label>
+                <input type="text" name="price" id="price-new-product" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="img-new-product" data-translate> Image : </label>
+                <input type="file" name="img" id="img-new-product" class="form-control-file" >
             </div>
 
             <input type="submit" class="btn btn-primary" value="Create">
@@ -216,26 +218,26 @@
     </div>
     <div class="page product-edit">
         <h1 data-translate>Edit Product</h1>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form id="product-edit" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PATCH">
             <div class="form-group">
                 <label for="title-product-edit">Title</label>
                 <input type="text" name="title" id="title-product-edit" class="form-control">
-                </div>
+            </div>
             <div class="form-group">
                 <label for="description-product-edit">Description</label>
                 <textarea name="description" id="description-product-edit" cols="30" rows="10" class="form-control"></textarea>
-                </div>
+            </div>
             <div class="form-group">
                 <label for="price-product-edit"></label>
                 <input type="text" name="price" id="price-product-edit" class="form-control">
-                </div>
+            </div>
             <div class="form-group">
                 <label for="img-product-edit" data-translate>Image</label>
                 <input type="file" name="img" id="img-product-edit" class="form-control-file">
-                </div>
+            </div>
             <input type="submit" class="btn btn-primary" value="Update">
-            </form>
+        </form>
         <div class="reviews"></div>
     </div>
 

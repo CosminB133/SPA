@@ -18,129 +18,153 @@ $(document).ready(function () {
         }
     );
 
-    $(document).on('submit','form.add-cart',function(event){
+    $('form#login').attr('action', config.routes.login);
+    $('form#checkout').attr('action', config.routes.orders);
+    $('form#new-product').attr('action', config.routes.products);
+
+    $(document).on('submit', 'form.add-cart', function (event) {
         event.preventDefault();
         $.ajax({
             url: config.routes.cart,
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : () => {
+            success: () => {
                 this.parentNode.parentNode.remove();
             }
         })
     });
 
-    $(document).on('submit','form.remove-cart',function(event){
+    $(document).on('submit', 'form.remove-cart', function (event) {
         event.preventDefault();
         $.ajax({
             url: config.routes.cart,
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : () => {
+            success: () => {
                 this.parentNode.parentNode.remove();
             }
         })
     });
 
-    $(document).on('submit','form#checkout',function(event){
+    $(document).on('submit', 'form#checkout', function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : (response) => {
+            success: (response) => {
                 window.location.hash = '#';
             },
-            error : (xhr,status,error) => {
+            error: (xhr, status, error) => {
                 renderErrors(xhr.responseJSON.errors);
             }
         })
     });
 
-    $(document).on('submit','form#login',function(event){
+    $(document).on('submit', 'form#login', function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : (response) => {
+            success: (response) => {
                 window.location.hash = '#products';
             },
-            error : (xhr,status,error) => {
+            error: (xhr, status, error) => {
                 renderErrors(xhr.responseJSON.errors);
                 $('#password').val('');
             }
         })
     });
 
-    $(document).on('submit','form#new-product',function(event){
+    $(document).on('submit', 'form#new-product', function (event) {
         event.preventDefault();
         console.log(new FormData(this));
         $.ajax({
             url: $(this).attr('action'),
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : (response) => {
+            success: (response) => {
                 window.location.hash = '#products';
             },
-            error : (xhr,status,error) => {
+            error: (xhr, status, error) => {
                 renderErrors(xhr.responseJSON.errors);
             }
         })
     });
 
-    $(document).on('submit','form#new-product',function(event){
+    $(document).on('submit', 'form.delete-product', function (event) {
         event.preventDefault();
         console.log(new FormData(this));
         $.ajax({
             url: $(this).attr('action'),
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
             processData: false,
             contentType: false,
-            success : (response) => {
-                window.location.hash = '#products';
-            },
-            error : (xhr,status,error) => {
-                renderErrors(xhr.responseJSON.errors);
-            }
-        })
-    });
-
-    $(document).on('submit','form.delete-product',function(event){
-        event.preventDefault();
-        console.log(new FormData(this));
-        $.ajax({
-            url: $(this).attr('action'),
-            type : 'POST',
-            dataType : 'json',
-            data : new FormData(this),
-            processData: false,
-            contentType: false,
-            success : (response) => {
+            success: (response) => {
                 this.parentNode.parentNode.remove();
             },
-            error : (xhr,status,error) => {
+            error: (xhr, status, error) => {
                 renderErrors(xhr.responseJSON.errors);
             }
         })
     });
+
+    $(document).on('submit', 'form#product-new', function (event) {
+        event.preventDefault();
+        console.log(new FormData(this));
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#products';
+            },
+            error: (xhr, status, error) => {
+                renderErrors(xhr.responseJSON.errors);
+            }
+        })
+    });
+
+    $(document).on('submit', 'form#product-edit', function (event) {
+        event.preventDefault();
+        console.log(new FormData(this));
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#products';
+            },
+            error: (xhr, status, error) => {
+                renderErrors(xhr.responseJSON.errors);
+            }
+        })
+    });
+
 
     window.onhashchange = function () {
         $('.page').hide();
@@ -149,7 +173,7 @@ $(document).ready(function () {
 
         hash = window.location.hash;
 
-        switch(true) {
+        switch (true) {
             case hash === '#cart':
                 $('.cart').show();
                 $.ajax({
@@ -171,11 +195,10 @@ $(document).ready(function () {
                     success: function (response) {
                         $('.products .list').html(renderListProducts(response.data));
                     }
-
                 });
                 break;
             case hash === '#products/create':
-                $('.product-new').show();
+                $('.new-product').show();
                 break;
             case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null :
                 $('.product-edit').show();
@@ -186,7 +209,6 @@ $(document).ready(function () {
                     url: config.routes.products + '/' + productId + '/edit',
                     dataType: 'json',
                     success: function (response) {
-                        console.log(response.data)
                         $('.product-edit').html(renderProductEdit(response.data));
                     }
                 });
@@ -200,10 +222,8 @@ $(document).ready(function () {
                     }
                 });
                 break;
-
-
-
-    }}
+        }
+    }
 
     window.onhashchange();
 })
