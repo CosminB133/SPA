@@ -59,9 +59,6 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $products = $order->products;
-        $response = new OrderResource($order);
-        $response->setProducts($products);
-        return $response;
+        return new OrderResource($order);
     }
 }
