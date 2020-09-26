@@ -24,8 +24,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $reviews = $product->reviews;
-        return view('products.show', ['product' => $product, 'reviews' => $reviews]);
+        return new ProductResource($product);
     }
 
     public function store(ProductRequest $request)
