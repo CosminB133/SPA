@@ -16,6 +16,7 @@
                 orders: '{{ route('orders') }}',
                 login: '{{ route('login') }}',
                 products: '{{ route('products') }}',
+                reviews: '{{ route('reviews') }}',
             }
         };
 
@@ -23,19 +24,14 @@
             return text;
         }
 
-        function renderErrors(errors) {
-            html = '';
+        function renderError(element, error) {
+            html = [
+                '<div class="alert alert-danger">',
+                error,
+                '</div>',
+            ].join('');
 
-            $.each(errors, function (key, error) {
-                console.log(error[0])
-                html += [
-                    '<div class="alert alert-danger">',
-                    error,
-                    '</div>',
-                ].join('');
-            });
-
-            $('#errors').html(html);
+            element.parent().after(html);
         }
 
         function renderListIndex(products) {
@@ -56,13 +52,14 @@
                     '<form action="' + config.routes.cart + '" class="add-cart">',
                     '<input type="hidden" name="id" value="' + product.id + '">',
                     '<input type="submit" class="btn btn-danger" value="' + trans('Add') + '">',
+                    '<a href="#products/'+ product.id + '">' + trans('Show') + '</a>',
                     '</form>',
                     '</div>',
                     '</div>',
                 ].join('');
             });
 
-            return html;
+            $('.index .list').html(html);
         }
 
         function renderListCart(products) {
@@ -90,7 +87,8 @@
                 ].join('');
             });
 
-            return html;
+            $('.cart .list').html(html);
+
         }
 
         function renderListProducts(products) {
@@ -117,8 +115,9 @@
                     '</div>',
                 ].join('');
             });
+            console.log(html)
+            $('.products .list').html(html);
 
-            return html;
         }
 
         function renderProductEdit(product) {
@@ -126,6 +125,24 @@
             $('#description-product-edit').text(product.description);
             $('#price-product-edit').attr('value', product.price);
             $('form#product-edit').attr('action', config.routes.products + '/' + product.id);
+
+            html = '';
+
+            $.each(product.reviews, function (key, review) {
+                html += [
+                    '<div class="card">',
+                    '<div class="card-body">',
+                    '<h3>' + review.rating + '</h3>',
+                    '<p>' + review.comments + '</p>',
+                    '<form action="' + config.routes.reviews + '/' + review.id + '" class="review-delete">',
+                    '<input type="hidden" name="_method" value="DELETE">',
+                    '<input type="submit" value="' + trans('Delete') + '" class="btn btn-danger">',
+                    '</form>',
+                    '</div>',
+                    '</div>',
+                ].join('');
+            });
+            $('.product-edit .reviews').html(html);
         }
 
         function renderListOrders(orders) {
@@ -146,11 +163,10 @@
                 ].join('');
             });
 
-            return html;
+            $('.orders .list').html(html);
         }
 
         function renderOrder(order) {
-            console.log(order)
             $('#name-order').text(order.name);
             $('#contact-order').text(order.contact);
             $('#comments-order').text(order.comments);
@@ -176,6 +192,42 @@
             $('.order .list').html(html);
         }
 
+        function renderProduct(product) {
+            $('#product-show-img').attr('src', '/img/' + product.id);
+            $('#product-show-title').text(product.title);
+            $('#product-show-description').text(product.description);
+            $('#product-show-price').text(product.price);
+
+            $('#review-post-product-id').attr('value', product.id);
+
+            html = '';
+
+            $.each(product.reviews, function (key, review) {
+                html += [
+                    '<div class="card">',
+                    '<div class="card-body">',
+                    '<h3>' + review.rating + '</h3>',
+                    '<p>' + review.comments + '</p>',
+                    '</div>',
+                    '</div>',
+                ].join('');
+            });
+            $('.product-show .reviews').html(html);
+        }
+
+        function addReview(review) {
+            html = [
+                '<div class="card">',
+                '<div class="card-body">',
+                '<h3>' + review[0].value + '</h3>',
+                '<p>' + review[1].value + '</p>',
+                '</div>',
+                '</div>',
+            ].join('');
+
+            $('.product-show .reviews').prepend(html);
+        }
+
     </script>
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -196,16 +248,19 @@
         <form id="checkout">
             <div class="form-group">
                 <label for="name" data-translate>Name</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name-cart">
             </div>
+
             <div class="form-group">
                 <label for="contact" data-translate>Contact details :</label>
-                <input type="text" class="form-control" name="contact" id="contact">
+                <input type="text" class="form-control" name="contact" id="contact-cart">
             </div>
+
             <div class="form-group">
                 <label for="comments" data-translate>Comments :</label>
-                <input type="text" class="form-control" name="comments" id="comments">
+                <input type="text" class="form-control" name="comments" id="comments-cart">
             </div>
+
             <input type="submit" class="btn btn-success" value="Submit">
         </form>
         <a href="#" class="button" data-translate>Go to index</a>
@@ -215,17 +270,17 @@
         <form id="login">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email">
+                <input id="email-login" type="email" class="form-control" name="email">
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" type="password" class="form-control" name="password">
+                <label for="password-login">Password</label>
+                <input id="password-login" type="password" class="form-control" name="password">
             </div>
 
             <div class="form-group">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                <label class="form-check-label" for="remember" data-translate>
+                <input class="form-check-input" type="checkbox" name="remember" id="remember-login">
+                <label class="form-check-label" for="remember-login" data-translate>
                     Remember Me
                 </label>
             </div>
@@ -264,6 +319,7 @@
             <input type="submit" class="btn btn-primary" value="Create">
         </form>
     </div>
+
     <div class="page product-edit">
         <h1 data-translate>Edit Product</h1>
         <form id="product-edit" method="post" enctype="multipart/form-data">
@@ -312,6 +368,43 @@
         </div>
 
         <div class="list"></div>
+    </div>
+
+
+    <div class="page product-show">
+
+        <div class="row" style="margin: 10px">
+            <div class="col-md-3">
+                <img id="product-show-img" alt="product image" class="img-fluid"
+                     style="max-height: 150px; margin-right: 5px">
+            </div>
+            <div class="col-md-9">
+                <h4 id="product-show-title"></h4>
+                <p id="product-show-description"></p>
+                <p id="product-show-price"></p>
+            </div>
+        </div>
+
+        <form id="review-post">
+            <div class="form-group">
+                <label for="rating-review-post" data-translate>Rating</label>
+                <select name="rating" id="rating-review-post">
+                    <option value="1" data-translate>1</option>
+                    <option value="2" data-translate>2</option>
+                    <option value="3" data-translate>3</option>
+                    <option value="4" data-translate>4</option>
+                    <option value="5" data-translate>5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comments-review-post" data-translate>Comments</label>
+                <textarea name="comments" id="comments-review-post" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <input type="hidden" name="product_id" id="review-post-product-id">
+            <input type="submit" class="btn btn-success" value="Submit">
+        </form>
+
+        <div class="reviews"></div>
     </div>
 
 </div>
