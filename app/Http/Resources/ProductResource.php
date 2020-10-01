@@ -6,6 +6,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
+    private $reviewFlag = false;
+
+    public function withReviews() {
+        $this->reviewFlag = true;
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -14,12 +20,17 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $response = [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'reviews' => ReviewResource::collection($this->reviews),
         ];
+
+        if ($this->reviewFlag) {
+            $response['reviews'] = ReviewResource::collection($this->reviews);
+        }
+
+        return $response;
     }
 }

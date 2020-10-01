@@ -5,38 +5,44 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
 
-    public function index()
+    public function __construct()
     {
-        $products = Product::all();
-        return ProductResource::collection($products);
+        $this->middleware('auth')->except('show');
     }
 
-    public function create()
+    public function index()
     {
-        return view('products.create', session('data', []));
+        return ProductResource::collection(Product::all());
     }
 
     public function show(Product $product)
     {
-        return new ProductResource($product);
+        $response = new ProductResource($product);
+        $response->withReviews();
+
+        return $response;
     }
 
     public function store(ProductRequest $request)
     {
         $product = new Product();
-        $product->title = $request->input('title');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
+
+        $product->fill([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+        ]);
+
         $product->save();
 
-        $path = public_path() . '/img/';
-        $request->file('img')->move($path, $product->id);
+        $request->file('img')->storeAs('/public/img', $product->id);
 
         return response()->json(['message' => 'Success']);
     }
@@ -44,18 +50,33 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return new ProductResource($product);
+        $response = new ProductResource($product);
+        $response->withReviews();
+
+        return $response;
     }
 
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        $product->title = $request->input('title');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
+        $request->validate([
+                'title' => 'required',
+                'description' => 'required',
+                'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+                'img' => 'nullable|mimes:jpg,jpeg,png,gif',
+        ]);
+
+        $product->fill([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+        ]);
+
         $product->save();
 
-        $request->img->move(public_path() . '/img/', $product->id);
+        if ($request->file('img')) {
+            $request->file('img')->storeAs('/public/img', $product->id);
+        }
 
         return response()->json(['message' => 'Success']);
     }
@@ -63,6 +84,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        Storage::delete('public/img/' . $product->id);
+
         return response()->json(['message' => 'Success']);
     }
 }

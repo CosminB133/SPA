@@ -9,24 +9,31 @@ class ReviewsController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate(
+        $request->validate(
             [
                 'product_id' => 'required|exists:products,id',
                 'rating' => 'required',
                 'comments' => 'required',
             ]
         );
+
         $review = new Review();
-        $review->comment = $validatedData['comments'];
-        $review->rating = $validatedData['rating'];
-        $review->product_id = $validatedData['product_id'];
+
+        $review->fill([
+                'comment' => $request->input('comments'),
+                'rating' => $request->input('rating'),
+        ]);
+        $review->product()->associate($request->input('product_id'));
+
         $review->save();
-        return redirect()->route('products.show', ['product' => $validatedData['product_id']]);
+
+        return response()->json(['message' => 'Success']);
     }
 
     public function destroy(Review $review)
     {
         $review->delete();
-        return redirect()->route('products.edit', ['product' => $review->product_id]);
+
+        return response()->json(['message' => 'Success']);
     }
 }

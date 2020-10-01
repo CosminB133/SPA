@@ -6,6 +6,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
 {
+    private $productsFlag = false;
+
+    public function withProducts()
+    {
+        $this->productsFlag = true;
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -14,14 +21,19 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $response = [
             'id' => $this->id,
             'name' => $this->name,
             'contact' => $this->contact,
             'comments' => $this->comments,
             'price' => $this->price,
             'created_at' => $this->created_at,
-            'products' => ProductResource::collection($this->products),
-        ];;
+        ];
+
+        if ($this->productsFlag) {
+            $response['products'] = ProductResource::collection($this->products);
+        }
+
+        return $response;
     }
 }

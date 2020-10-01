@@ -14,38 +14,42 @@ use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except('store');
+    }
+
     public function index()
     {
         $orders = Order::all();
+
         return OrderResource::collection($orders);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate(
-            [
+        $request->validate([
                 'name' => 'required',
                 'comments' => 'required',
                 'contact' => 'required',
-            ]
-        );
+        ]);
 
         if (!$request->session()->get('cart')) {
             return response()->json(['errors' => ['cart' => 'Cart is empty!']], 422);
         }
 
-        $products = array_map('App\Product::find', $request->session()->get('cart'));
-        $orderPrice = array_reduce(
-            $products,
-            function ($sum, $product) {
-                return $sum + $product->price;
-            }
-        );
+        $products = Product::whereIn('id', $request->session()->get('cart'))->get();
+
+
         $order = new Order();
-        $order->name = $validatedData['name'];
-        $order->comments = $validatedData['comments'];
-        $order->contact = $validatedData['contact'];
-        $order->price = $orderPrice;
+
+        $order->fill([
+                'name' => $request->input('name'),
+                'comments' => $request->input('comments'),
+                'contact' => $request->input('contact'),
+                'price' => $products->sum('price'),
+        ]);
+
         $order->save();
 
         foreach ($products as $product) {
@@ -59,6 +63,9 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return new OrderResource($order);
+        $response = new OrderResource($order);
+        $response->withProducts();
+
+        return $response;
     }
 }

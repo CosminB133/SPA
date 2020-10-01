@@ -37361,17 +37361,15 @@ $(document).ready(function () {
         window.location.hash = '#products';
       },
       error: function error(xhr, status, _error2) {
-        if ('errors' in xhr.responseJSON) {
-          $('.alert').remove();
-          errors = xhr.responseJSON.errors;
+        $('.alert').remove();
+        errors = xhr.responseJSON.errors;
 
-          if ('email' in errors) {
-            renderError($('#email-login'), errors.email);
-          }
+        if ('email' in errors) {
+          renderError($('#email-login'), errors.email);
+        }
 
-          if ('password' in errors) {
-            renderError($('#password-login'), errors.password);
-          }
+        if ('password' in errors) {
+          renderError($('#password-login'), errors.password);
         }
 
         $('#password-login').val('');
@@ -37607,14 +37605,18 @@ $(document).ready(function () {
 
       case hash.match(/#orders\/[1-9]+[0-9]*/i) !== null:
         $('.order').show();
+        console.log('ceas');
         var orderId = hash.match(/#orders\/([1-9]+[0-9]*)/i)[1];
         $.ajax({
           url: config.routes.orders + '/' + orderId,
           dataType: 'json',
           success: function success(response) {
+            console.log(response);
             renderOrder(response.data);
           },
           error: function error(xhr, status, _error11) {
+            console.log(xhr);
+
             if (xhr.status === 401) {
               window.location.hash = '#login';
             }

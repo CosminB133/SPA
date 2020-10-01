@@ -88,7 +88,6 @@
             });
 
             $('.cart .list').html(html);
-
         }
 
         function renderListProducts(products) {
@@ -115,9 +114,8 @@
                     '</div>',
                 ].join('');
             });
-            console.log(html)
-            $('.products .list').html(html);
 
+            $('.products .list').html(html);
         }
 
         function renderProductEdit(product) {
@@ -142,6 +140,7 @@
                     '</div>',
                 ].join('');
             });
+
             $('.product-edit .reviews').html(html);
         }
 
@@ -189,6 +188,7 @@
                     '</div>',
                 ].join('');
             });
+
             $('.order .list').html(html);
         }
 
@@ -212,6 +212,7 @@
                     '</div>',
                 ].join('');
             });
+
             $('.product-show .reviews').html(html);
         }
 
@@ -369,7 +370,6 @@
 
         <div class="list"></div>
     </div>
-
 
     <div class="page product-show">
 
