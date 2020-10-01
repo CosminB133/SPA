@@ -12,11 +12,11 @@
     <script type="text/javascript">
         var config = {
             routes: {
-                cart: '{{ route('cart') }}',
-                orders: '{{ route('orders') }}',
+                cart: '{{ route('cart.index') }}',
+                orders: '{{ route('orders.index') }}',
                 login: '{{ route('login') }}',
-                products: '{{ route('products') }}',
-                reviews: '{{ route('reviews') }}',
+                products: '{{ route('products.index') }}',
+                reviews: '{{ route('reviews.store') }}',
             }
         };
 
@@ -41,7 +41,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -69,7 +69,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -97,7 +97,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -178,7 +178,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-9">',
                     '<h4>' + product.title + '</h4>',
@@ -193,7 +193,7 @@
         }
 
         function renderProduct(product) {
-            $('#product-show-img').attr('src', '/img/' + product.id);
+            $('#product-show-img').attr('src', '/storage/img/' + product.id);
             $('#product-show-title').text(product.title);
             $('#product-show-description').text(product.description);
             $('#product-show-price').text(product.price);

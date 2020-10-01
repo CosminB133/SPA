@@ -30,6 +30,7 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form.add-cart', function (event) {
             event.preventDefault();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -62,6 +63,9 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#checkout', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -73,8 +77,6 @@ $(document).ready(function () {
                     window.location.hash = '#';
                 },
                 error: (xhr, status, error) => {
-                    $('.alert').remove();
-
                     if ('errors' in xhr.responseJSON) {
                         errors = xhr.responseJSON.errors;
                         if ('name' in errors) {
@@ -94,6 +96,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#login', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -105,8 +109,6 @@ $(document).ready(function () {
                     window.location.hash = '#products';
                 },
                 error: (xhr, status, error) => {
-                    $('.alert').remove();
-
                     if ('errors' in xhr.responseJSON) {
                         errors = xhr.responseJSON.errors;
                         if ('email' in errors) {
@@ -124,6 +126,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form.delete-product', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -146,6 +150,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#new-product', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -172,7 +178,7 @@ $(document).ready(function () {
                             renderError($('#description-new-product'), errors.description);
                         }
                         if ('price' in errors) {
-                            renderError($('#price-new-product'), errors.description);
+                            renderError($('#price-new-product'), errors.price);
                         }
                         if ('img' in errors) {
                             renderError($('#img-new-product'), errors.img);
@@ -186,6 +192,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#product-edit', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -213,7 +221,7 @@ $(document).ready(function () {
                             renderError($('#description-product-edit'), errors.description);
                         }
                         if ('price' in errors) {
-                            renderError($('#price-product-edit'), errors.description);
+                            renderError($('#price-product-edit'), errors.price);
                         }
                         if ('img' in errors) {
                             renderError($('#img-product-edit'), errors.img);
@@ -226,6 +234,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#review-post', function (event) {
             event.preventDefault();
+            $('.alert').remove();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -242,10 +252,10 @@ $(document).ready(function () {
                     if ('errors' in xhr.responseJSON) {
                         errors = xhr.responseJSON.errors;
                         if ('rating' in errors) {
-                            renderError($('#rating-review-post'), errors.title);
+                            renderError($('#rating-review-post'), errors.rating);
                         }
-                        if ('description' in errors) {
-                            renderError($('#comments-review-post'), errors.description);
+                        if ('comments' in errors) {
+                            renderError($('#comments-review-post'), errors.comments);
                         }
                     }
                 }
@@ -255,6 +265,7 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form.review-delete', function (event) {
             event.preventDefault();
+            $('.alert').remove();
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -368,11 +379,9 @@ $(document).ready(function () {
                     url: config.routes.orders + '/' + orderId,
                     dataType: 'json',
                     success: function (response) {
-                        console.log(response);
                         renderOrder(response.data);
                     },
                     error: (xhr, status, error) => {
-                        console.log(xhr)
                         if (xhr.status === 401) {
                             window.location.hash = '#login';
                         }

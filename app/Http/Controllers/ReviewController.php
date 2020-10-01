@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Review;
 use Illuminate\Http\Request;
 
-class ReviewsController extends Controller
+class ReviewController extends Controller
 {
     public function store(Request $request)
     {
