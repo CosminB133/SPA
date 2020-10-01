@@ -308,7 +308,6 @@ $(document).ready(function () {
 
             case hash === '#login':
                 $('.login').show();
-
                 break;
 
             case hash === '#products':
@@ -330,7 +329,6 @@ $(document).ready(function () {
 
             case hash === '#products/create':
                 $('.new-product').show();
-
                 break;
 
             case hash.match(/#products\/[1-9]+[0-9]*\/edit/i) !== null :
@@ -367,7 +365,6 @@ $(document).ready(function () {
                         }
                     }
                 });
-
                 break;
 
             case hash.match(/#orders\/[1-9]+[0-9]*/i) !== null:
@@ -387,7 +384,6 @@ $(document).ready(function () {
                         }
                     }
                 });
-
                 break;
 
             case hash.match(/#products\/[1-9]+[0-9]*/i) !== null:
@@ -402,19 +398,18 @@ $(document).ready(function () {
                         renderProduct(response.data);
                     }
                 });
-
                 break;
 
             default:
                 $('.index').show();
 
-                $.ajax('/', {
+                $.ajax({
+                    url: config.routes.index,
                     dataType: 'json',
                     success: function (response) {
                         renderListIndex(response.data);
                     }
                 });
-
                 break;
         }
     }

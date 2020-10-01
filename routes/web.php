@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/spa', function () {
+Route::get('/', function () {
     return view('spa');
 });
 
-Route::get('/', 'IndexController@index')->name('index');
+Route::get('/index', 'IndexController@index')->name('index');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart', 'CartController@store')->name('cart.store');

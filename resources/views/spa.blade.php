@@ -12,6 +12,7 @@
     <script type="text/javascript">
         var config = {
             routes: {
+                index: '{{ route('index') }}',
                 cart: '{{ route('cart.index') }}',
                 orders: '{{ route('orders.index') }}',
                 login: '{{ route('login') }}',
