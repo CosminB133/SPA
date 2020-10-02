@@ -41,7 +41,7 @@
             <input type="file" name="img" id="img" class="form-control-file">
         </div>
 
-        @error('price')
+        @error('img')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 

@@ -37273,18 +37273,31 @@ $.ajaxSetup({
 });
 $(document).ready(function () {
   $('[data-translate]').each(function () {
-    $(this).text(trans($(this).text()));
-  });
-  $('input[type = "submit"]').each(function () {
-    $(this).attr('value', trans($(this).attr('value')));
+    $(this).text(__($(this).text()));
   });
   $('img').each(function () {
-    $(this).attr('alt', trans($(this).attr('alt')));
+    $(this).attr('alt', __($(this).attr('alt')));
   });
   $('form#login').attr('action', config.routes.login);
   $('form#checkout').attr('action', config.routes.orders);
   $('form#new-product').attr('action', config.routes.products);
   $('form#review-post').attr('action', config.routes.reviews);
+  $(document).ajaxError(function (event, xhr, settings) {
+    $('.alert').remove();
+
+    if (xhr.status === 401) {
+      window.location.hash = '#login';
+    }
+
+    console.log(xhr.responseJSON);
+
+    if ('errors' in xhr.responseJSON) {
+      errors = xhr.responseJSON.errors;
+      $.each(errors, function (key, error) {
+        renderError($('[name="' + key + '"]'), error);
+      });
+    }
+  });
   $(document).on('submit', 'form.add-cart', function (event) {
     var _this = this;
 
@@ -37297,7 +37310,7 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function success() {
-        _this.parentNode.parentNode.remove();
+        _this.closest('.product').remove();
       }
     });
   });
@@ -37313,7 +37326,7 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function success() {
-        _this2.parentNode.parentNode.remove();
+        _this2.closest('.product').remove();
       }
     });
   });
@@ -37329,23 +37342,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         window.location.hash = '#';
-      },
-      error: function error(xhr, status, _error) {
-        if ('errors' in xhr.responseJSON) {
-          errors = xhr.responseJSON.errors;
-
-          if ('name' in errors) {
-            renderError($('#name-cart'), errors.name);
-          }
-
-          if ('contact' in errors) {
-            renderError($('#contact-cart'), errors.contact);
-          }
-
-          if ('comments' in errors) {
-            renderError($('#comments-cart'), errors.comments);
-          }
-        }
       }
     });
   });
@@ -37361,21 +37357,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error2) {
-        if ('errors' in xhr.responseJSON) {
-          errors = xhr.responseJSON.errors;
-
-          if ('email' in errors) {
-            renderError($('#email-login'), errors.email);
-          }
-
-          if ('password' in errors) {
-            renderError($('#password-login'), errors.password);
-          }
-        }
-
-        $('#password-login').val('');
       }
     });
   });
@@ -37393,12 +37374,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         _this3.parentNode.parentNode.remove();
-      },
-      error: function error(xhr, status, _error3) {
-        if (xhr.status === 401) {
-          window.location.hash = '#login';
-          return;
-        }
       }
     });
   });
@@ -37414,34 +37389,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error4) {
-        $('.alert').remove();
-
-        if (xhr.status === 401) {
-          window.location.hash = '#login';
-          return;
-        }
-
-        if ('errors' in xhr.responseJSON) {
-          errors = xhr.responseJSON.errors;
-
-          if ('title' in errors) {
-            renderError($('#title-new-product'), errors.title);
-          }
-
-          if ('description' in errors) {
-            renderError($('#description-new-product'), errors.description);
-          }
-
-          if ('price' in errors) {
-            renderError($('#price-new-product'), errors.price);
-          }
-
-          if ('img' in errors) {
-            renderError($('#img-new-product'), errors.img);
-          }
-        }
       }
     });
   });
@@ -37457,34 +37404,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         window.location.hash = '#products';
-      },
-      error: function error(xhr, status, _error5) {
-        $('.alert').remove();
-
-        if (xhr.status === 401) {
-          window.location.hash = '#login';
-          return;
-        }
-
-        if ('errors' in xhr.responseJSON) {
-          errors = xhr.responseJSON.errors;
-
-          if ('title' in errors) {
-            renderError($('#title-product-edit'), errors.title);
-          }
-
-          if ('description' in errors) {
-            renderError($('#description-product-edit'), errors.description);
-          }
-
-          if ('price' in errors) {
-            renderError($('#price-product-edit'), errors.price);
-          }
-
-          if ('img' in errors) {
-            renderError($('#img-product-edit'), errors.img);
-          }
-        }
       }
     });
   });
@@ -37502,21 +37421,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         addReview($(_this4).serializeArray());
-      },
-      error: function error(xhr, status, _error6) {
-        $('.alert').remove();
-
-        if ('errors' in xhr.responseJSON) {
-          errors = xhr.responseJSON.errors;
-
-          if ('rating' in errors) {
-            renderError($('#rating-review-post'), errors.rating);
-          }
-
-          if ('comments' in errors) {
-            renderError($('#comments-review-post'), errors.comments);
-          }
-        }
       }
     });
   });
@@ -37534,12 +37438,6 @@ $(document).ready(function () {
       contentType: false,
       success: function success(response) {
         _this5.parentNode.parentNode.remove();
-      },
-      error: function error(xhr, status, _error7) {
-        if (xhr.status === 401) {
-          window.location.hash = '#login';
-          return;
-        }
       }
     });
   });
@@ -37573,7 +37471,7 @@ $(document).ready(function () {
           success: function success(response) {
             renderListProducts(response.data);
           },
-          error: function error(xhr, status, _error8) {
+          error: function error(xhr, status, _error) {
             if (xhr.status === 401) {
               window.location.hash = '#login';
             }
@@ -37593,11 +37491,6 @@ $(document).ready(function () {
           dataType: 'json',
           success: function success(response) {
             renderProductEdit(response.data);
-          },
-          error: function error(xhr, status, _error9) {
-            if (xhr.status === 401) {
-              window.location.hash = '#login';
-            }
           }
         });
         break;
@@ -37609,11 +37502,6 @@ $(document).ready(function () {
           dataType: 'json',
           success: function success(response) {
             renderListOrders(response.data);
-          },
-          error: function error(xhr, status, _error10) {
-            if (xhr.status === 401) {
-              window.location.hash = '#login';
-            }
           }
         });
         break;
@@ -37627,7 +37515,7 @@ $(document).ready(function () {
           success: function success(response) {
             renderOrder(response.data);
           },
-          error: function error(xhr, status, _error11) {
+          error: function error(xhr, status, _error2) {
             if (xhr.status === 401) {
               window.location.hash = '#login';
             }

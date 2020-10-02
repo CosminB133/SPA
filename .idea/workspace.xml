@@ -22,11 +22,12 @@
     <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="Code Style">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/ProductRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/spa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/spa.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +157,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-Training" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -203,7 +204,10 @@
       <workItem from="1601574271883" duration="13307000" />
       <workItem from="1601628982581" duration="227000" />
       <workItem from="1601633196699" duration="3400000" />
-      <workItem from="1601642794681" duration="4215000" />
+      <workItem from="1601642794681" duration="11514000" />
+      <workItem from="1601660758242" duration="4226000" />
+      <workItem from="1601666350979" duration="1839000" />
+      <workItem from="1601673694523" duration="1008000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -408,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601634881465</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="SPA and MPA">
+      <created>1601647153545</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1601647153545</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,17 +462,18 @@
     <MESSAGE value="Code Style and changing the controllers" />
     <MESSAGE value="Clean up and changing the models." />
     <MESSAGE value="Code Style" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code Style" />
+    <MESSAGE value="SPA and MPA" />
+    <option name="LAST_COMMIT_MESSAGE" value="SPA and MPA" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1173" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601576677164">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1173" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601576677164" />
-    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl" timestamp="1601629206846">
+    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl" timestamp="1601663847590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601574582319" />
+    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601663847590" />
     <state x="1072" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.3840.1040@0.0.3840.1040" timestamp="1600764705201" />
     <state x="743" y="277" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601629206846" />
     <state x="2663" y="288" width="424" height="478" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601293230523" />
@@ -483,12 +495,12 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600165171985" />
-    <state x="0" y="0" width="959" height="1039" maximized="true" key="dock-window-1" timestamp="1601592943103">
+    <state x="0" y="0" width="959" height="1039" key="dock-window-1" timestamp="1601674248672">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="0" y="0" width="959" height="1039" maximized="true" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1601592943103" />
-    <state x="1978" y="0" width="1586" height="796" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601466517348" />
-    <state x="612" y="0" width="1586" height="796" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601470103433" />
+    <state x="0" y="0" width="959" height="1039" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1601674248672" />
+    <state x="2226" y="0" width="1549" height="820" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601647537888" />
+    <state x="1955" y="0" width="1549" height="820" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601654313815" />
     <state x="10" y="0" width="1625" height="774" key="dock-window-2" timestamp="1600951900626">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -503,15 +515,16 @@
     </state>
     <state x="395" y="236" width="470" height="754" key="dock-window-4/0.0.1920.1040@0.0.1920.1040" timestamp="1600708552347" />
     <state x="528" y="0" width="470" height="754" key="dock-window-4/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600698420969" />
-    <state x="143" y="238" key="run.anything.popup" timestamp="1601115092768">
+    <state x="143" y="238" key="run.anything.popup" timestamp="1601648462278">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="143" y="238" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601115092768" />
-    <state x="623" y="220" width="672" height="653" key="search.everywhere.popup" timestamp="1601580013326">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="143" y="238" key="run.anything.popup/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601648462278" />
+    <state x="2543" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1601650794434">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2543" y="228" width="672" height="160" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600611432686" />
     <state x="623" y="220" width="672" height="653" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601580013326" />
-    <state x="2543" y="228" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1600955434891" />
+    <state x="2543" y="228" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601650794434" />
   </component>
 </project>

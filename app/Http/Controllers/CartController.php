@@ -8,33 +8,40 @@ use App\Product;
 
 class CartController extends Controller
 {
-    public function index(Request $request)
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    public function index()
     {
         $products = session('cart') ? Product::whereIn('id', session('cart'))->get() : [];
 
-        if ($request->ajax()) {
+        if ($this->request->ajax()) {
             return ProductResource::collection($products);
         }
 
         return view('cart', ['products' => $products]);
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
+        $this->request->validate([
             'id' => 'required|exists:products,id'
         ]);
 
         if (
-            $request->session()->has('cart')
-            && !in_array($request->id, $request->session()->get('cart'))
+            $this->request->session()->has('cart')
+            && !in_array($this->request->id, $this->request->session()->get('cart'))
         ) {
-            $request->session()->push('cart', $request->id);
+            $this->request->session()->push('cart', $this->request->id);
         } else {
-            $request->session()->put('cart', [$request->id]);
+            $this->request->session()->put('cart', [$this->request->id]);
         }
 
-        if ($request->ajax()) {
+        if ($this->request->ajax()) {
             return response()->json(['message' => 'Success']);
         }
 
@@ -42,25 +49,25 @@ class CartController extends Controller
 
     }
 
-    public function destroy(Request $request)
+    public function destroy()
     {
-        $request->validate([
+        $this->request->validate([
             'id' => 'required|exists:products,id'
         ]);
 
-        if (!$request->session()->has('cart')) {
+        if (!$this->request->session()->has('cart')) {
             return redirect()->route('cart.index')->withErrors(['cart' => 'Cart already empty'])->withInput();
         }
 
-        $cart = $request->session()->get('cart');
+        $cart = $this->request->session()->get('cart');
         array_splice(
             $cart,
-            array_search($request->input('id'), $cart),
+            array_search($this->request->input('id'), $cart),
             1
         );
-        $request->session()->put('cart', $cart);
+        $this->request->session()->put('cart', $cart);
 
-        if ($request->ajax()) {
+        if ($this->request->ajax()) {
             return response()->json(['message' => 'Success']);
         }
 

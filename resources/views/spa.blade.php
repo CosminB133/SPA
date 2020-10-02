@@ -21,7 +21,7 @@
             }
         };
 
-        function trans(text) {
+        function __(text) {
             return text;
         }
 
@@ -32,7 +32,7 @@
                 '</div>',
             ].join('');
 
-            element.parent().after(html);
+            element.closest('.form-group').after(html);
         }
 
         function renderListIndex(products) {
@@ -40,9 +40,9 @@
 
             $.each(products, function (key, product) {
                 html += [
-                    '<div class="row" style="margin: 10px">',
+                    '<div class="row product" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + __('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -52,8 +52,8 @@
                     '<div class="col-md-3">',
                     '<form action="' + config.routes.cart + '" class="add-cart">',
                     '<input type="hidden" name="id" value="' + product.id + '">',
-                    '<input type="submit" class="btn btn-danger" value="' + trans('Add') + '">',
-                    '<a href="#products/'+ product.id + '">' + trans('Show') + '</a>',
+                    '<button class="btn btn-primary">' +  __('Add') + '</button>',
+                    '<a href="#products/'+ product.id + '">' + __('Show') + '</a>',
                     '</form>',
                     '</div>',
                     '</div>',
@@ -68,9 +68,9 @@
 
             $.each(products, function (key, product) {
                 html += [
-                    '<div class="row" style="margin: 10px">',
+                    '<div class="row product" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + __('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -81,7 +81,7 @@
                     '<form action="' + config.routes.cart + '" class="remove-cart">',
                     '<input type="hidden" name="_method" value="DELETE">',
                     '<input type="hidden" name="id" value="' + product.id + '">',
-                    '<input type="submit" class="btn btn-danger" value="' + trans('Remove') + '">',
+                    '<button class="btn btn-danger">' + __('Remove') + '</button>',
                     '</form>',
                     '</div>',
                     '</div>',
@@ -98,7 +98,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + __('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-6">',
                     '<h4>' + product.title + '</h4>',
@@ -106,10 +106,10 @@
                     '<p>' + product.price + '</p>',
                     '</div>',
                     '<div class="col-md-3">',
-                    '<a href="#products/' + product.id + '/edit" class="btn btn-primary">' + trans('Edit') + '</a>',
+                    '<a href="#products/' + product.id + '/edit" class="btn btn-primary">' + __('Edit') + '</a>',
                     '<form action="' + config.routes.products + '/'+ product.id + '" class="delete-product">',
                     '<input type="hidden" name="_method" value="DELETE">',
-                    '<input type="submit" class="btn btn-danger" value="' + trans('Delete') + '">',
+                    '<button class="btn btn-danger">' + __('RemoveDelete') + '</button>',
                     '</form>',
                     '</div>',
                     '</div>',
@@ -135,7 +135,7 @@
                     '<p>' + review.comments + '</p>',
                     '<form action="' + config.routes.reviews + '/' + review.id + '" class="review-delete">',
                     '<input type="hidden" name="_method" value="DELETE">',
-                    '<input type="submit" value="' + trans('Delete') + '" class="btn btn-danger">',
+                    '<button class="btn btn-danger">' + __('Delete') + '</button>',
                     '</form>',
                     '</div>',
                     '</div>',
@@ -153,11 +153,11 @@
                     '<div class="card" style="margin: 10px">',
                     '<h1 class="card-header">' + order.name + '</h1>',
                     '<div class="card-body">',
-                    '<p>' + trans('Contact details') + ':' + order.contact + '</p>',
-                    '<p>' + trans('Comments') + ':' + order.comments + '</p>',
-                    '<p>'+ trans('Order price:') + ':' + order.price + '</p>',
-                    '<p>' + trans('Made at') + ':'  + order.created_at + '</p>',
-                    '<a href="#orders/' + order.id + '" class="btn btn-primary">' + trans('Show') + '</a>',
+                    '<p>' + __('Contact details') + ':' + order.contact + '</p>',
+                    '<p>' + __('Comments') + ':' + order.comments + '</p>',
+                    '<p>'+ __('Order price:') + ':' + order.price + '</p>',
+                    '<p>' + __('Made at') + ':'  + order.created_at + '</p>',
+                    '<a href="#orders/' + order.id + '" class="btn btn-primary">' + __('Show') + '</a>',
                     '</div>',
                     '</div>',
                 ].join('');
@@ -179,7 +179,7 @@
                 html += [
                     '<div class="row" style="margin: 10px">',
                     '<div class="col-md-3">',
-                    '<img src="/storage/img/' + product.id + '" alt="' + trans('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
+                    '<img src="/storage/img/' + product.id + '" alt="' + __('product image') + '" class="img-fluid" style="max-height: 150px; margin-right: 5px">',
                     '</div>',
                     '<div class="col-md-9">',
                     '<h4>' + product.title + '</h4>',
@@ -242,36 +242,36 @@
 
     <div class="page index">
         <div class="list"></div>
-        <a href="#cart" class="btn btn-primary">Go to cart</a>
+        <a href="#cart" class="btn btn-primary" data-translate>Go to cart</a>
     </div>
 
     <div class="page cart">
         <div class="list"></div>
         <form id="checkout">
             <div class="form-group">
-                <label for="name" data-translate>Name</label>
+                <label for="name-cart" data-translate>Name</label>
                 <input type="text" class="form-control" name="name" id="name-cart">
             </div>
 
             <div class="form-group">
-                <label for="contact" data-translate>Contact details :</label>
+                <label for="contact-cart" data-translate>Contact details :</label>
                 <input type="text" class="form-control" name="contact" id="contact-cart">
             </div>
 
             <div class="form-group">
-                <label for="comments" data-translate>Comments :</label>
+                <label for="comments-cart" data-translate>Comments :</label>
                 <input type="text" class="form-control" name="comments" id="comments-cart">
             </div>
 
-            <input type="submit" class="btn btn-success" value="Submit">
+            <button class="btn btn-success" data-translate>Submit</button>
         </form>
-        <a href="#" class="button" data-translate>Go to index</a>
+        <a href="#" class="btn btn-primary" data-translate>Go to index</a>
     </div>
 
     <div class="page login">
         <form id="login">
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email-login">Email</label>
                 <input id="email-login" type="email" class="form-control" name="email">
             </div>
 
@@ -286,7 +286,7 @@
                     Remember Me
                 </label>
             </div>
-            <input type="submit" class="btn btn-primary" value="Login">
+            <button class="btn btn-primary" data-translate>Login</button>
         </form>
     </div>
 
@@ -299,12 +299,14 @@
         <div class="list"></div>
         <h1 data-translate>Add Product</h1>
         <form id="new-product">
+
             <div class="form-group">
                 <label for="title" data-translate> Title : </label>
                 <input type="text" name="title" id="title-new-product" class="form-control">
             </div>
+
             <div class="form-group">
-                <label for="description-new-product" data-translate> Description </label>
+                <label for="description-new-product" data-translate> Description : </label>
                 <textarea name="description" id="description-new-product" cols="30" rows="10" class="form-control"></textarea>
             </div>
 
@@ -318,7 +320,7 @@
                 <input type="file" name="img" id="img-new-product" class="form-control-file" >
             </div>
 
-            <input type="submit" class="btn btn-primary" value="Create">
+            <button class="btn btn-primary" data-translate>Create</button>
         </form>
     </div>
 
@@ -342,7 +344,8 @@
                 <label for="img-product-edit" data-translate>Image</label>
                 <input type="file" name="img" id="img-product-edit" class="form-control-file">
             </div>
-            <input type="submit" class="btn btn-primary" value="Update">
+
+            <button class="btn btn-primary" data-translate>Update</button>
         </form>
         <div class="reviews"></div>
     </div>
@@ -402,7 +405,8 @@
                 <textarea name="comments" id="comments-review-post" cols="30" rows="10" class="form-control"></textarea>
             </div>
             <input type="hidden" name="product_id" id="review-post-product-id">
-            <input type="submit" class="btn btn-success" value="Submit">
+
+            <button class="btn btn-success" data-translate>Submit</button>
         </form>
 
         <div class="reviews"></div>

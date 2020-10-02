@@ -13,44 +13,50 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+    protected $request;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
         $this->middleware('auth')->except('store');
     }
 
     public function index()
     {
         $orders = Order::all();
+        if ($this->request->ajax()) {
+            return OrderResource::collection($orders);
+        }
 
-        return OrderResource::collection($orders);
+        return view('orders.index', ['orders' => $orders]);
+
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
+        $this->request->validate([
             'name' => 'required',
             'comments' => 'required',
             'contact' => 'required',
         ]);
 
-        if (!$request->session()->get('cart')) {
-            if ($request->ajax()) {
+        if (!$this->request->session()->get('cart')) {
+            if ($this->request->ajax()) {
                 return response()->json(['errors' => ['cart' => 'Cart is empty!']], 422);
             }
 
             return redirect()->route('cart.index')->withErrors(['cart' => 'Cart is empty!'])->withInput();
         }
 
-        $products = Product::whereIn('id', $request->session()->get('cart'))->get();
+        $products = Product::whereIn('id', $this->request->session()->get('cart'))->get();
 
 
         $order = new Order();
 
         $order->fill([
-            'name' => $request->input('name'),
-            'comments' => $request->input('comments'),
-            'contact' => $request->input('contact'),
+            'name' => $this->request->input('name'),
+            'comments' => $this->request->input('comments'),
+            'contact' => $this->request->input('contact'),
             'price' => $products->sum('price'),
         ]);
 
@@ -62,16 +68,16 @@ class OrderController extends Controller
 
         Mail::to(config('services.admin.email'))->send(new OrderEmail($order, $products));
 
-        if ($request->ajax()) {
+        if ($this->request->ajax()) {
             return response()->json(['message' => 'Success']);
         }
 
         return redirect()->route('index');
     }
 
-    public function show(Request $request, Order $order)
+    public function show(Order $order)
     {
-        if ($request->ajax()) {
+        if ($this->request->ajax()) {
             $response = new OrderResource($order);
             $response->withProducts();
 

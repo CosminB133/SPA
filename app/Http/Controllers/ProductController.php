@@ -107,7 +107,12 @@ class ProductController extends Controller
             $this->request->file('img')->storeAs('/public/img', $product->id);
         }
 
-        return response()->json(['message' => 'Success']);
+        if ($this->request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('products.index');
+
     }
 
     public function destroy(Product $product)

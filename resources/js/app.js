@@ -9,21 +9,35 @@ $.ajaxSetup({
 $(document).ready(function () {
 
     $('[data-translate]').each(function () {
-        $(this).text(trans($(this).text()));
-    });
-
-    $('input[type = "submit"]').each(function () {
-        $(this).attr('value', trans($(this).attr('value')));
+        $(this).text(__($(this).text()));
     });
 
     $('img').each(function () {
-        $(this).attr('alt', trans($(this).attr('alt')));
+        $(this).attr('alt', __($(this).attr('alt')));
     });
 
     $('form#login').attr('action', config.routes.login);
     $('form#checkout').attr('action', config.routes.orders);
     $('form#new-product').attr('action', config.routes.products);
     $('form#review-post').attr('action', config.routes.reviews);
+
+    $(document).ajaxError(function (event, xhr, settings) {
+        $('.alert').remove();
+
+        if (xhr.status === 401) {
+            window.location.hash = '#login';
+        }
+
+        console.log(xhr.responseJSON);
+
+
+        if ('errors' in xhr.responseJSON) {
+            errors = xhr.responseJSON.errors;
+            $.each(errors, function (key, error) {
+                renderError($('[name="' + key + '"]'), error);
+            });
+        }
+    });
 
     $(document).on('submit', 'form.add-cart', function (event) {
         event.preventDefault();
@@ -35,9 +49,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: () => {
-                this.parentNode.parentNode.remove();
-            }
+            success: () => this.closest('.product').remove()
         });
     });
 
@@ -50,16 +62,13 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: () => {
-                this.parentNode.parentNode.remove();
-            }
+            success: () => this.closest('.product').remove()
         });
     });
 
     $(document).on('submit', 'form#checkout', function (event) {
         event.preventDefault();
         $('.alert').remove();
-
 
         $.ajax({
             url: $(this).attr('action'),
@@ -68,23 +77,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                window.location.hash = '#';
-            },
-            error: (xhr, status, error) => {
-                if ('errors' in xhr.responseJSON) {
-                    errors = xhr.responseJSON.errors;
-                    if ('name' in errors) {
-                        renderError($('#name-cart'), errors.name)
-                    }
-                    if ('contact' in errors) {
-                        renderError($('#contact-cart'), errors.contact)
-                    }
-                    if ('comments' in errors) {
-                        renderError($('#comments-cart'), errors.comments)
-                    }
-                }
-            }
+            success: () => window.location.hash = '#'
         });
     });
 
@@ -99,21 +92,8 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                window.location.hash = '#products';
-            },
-            error: (xhr, status, error) => {
-                if ('errors' in xhr.responseJSON) {
-                    errors = xhr.responseJSON.errors;
-                    if ('email' in errors) {
-                        renderError($('#email-login'), errors.email);
-                    }
-                    if ('password' in errors) {
-                        renderError($('#password-login'), errors.password);
-                    }
-                }
-                $('#password-login').val('');
-            }
+            success: () => window.location.hash = '#products'
+
         });
     });
 
@@ -128,15 +108,8 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                this.parentNode.parentNode.remove();
-            },
-            error: (xhr, status, error) => {
-                if (xhr.status === 401) {
-                    window.location.hash = '#login';
-                    return;
-                }
-            }
+            success: () => this.parentNode.parentNode.remove()
+
         });
     });
 
@@ -151,33 +124,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                window.location.hash = '#products';
-            },
-            error: (xhr, status, error) => {
-                $('.alert').remove();
-                if (xhr.status === 401) {
-                    window.location.hash = '#login';
-                    return;
-                }
-                if ('errors' in xhr.responseJSON){
-                    errors = xhr.responseJSON.errors;
-
-                    if ('title' in errors) {
-                        renderError($('#title-new-product'), errors.title);
-                    }
-                    if ('description' in errors) {
-                        renderError($('#description-new-product'), errors.description);
-                    }
-                    if ('price' in errors) {
-                        renderError($('#price-new-product'), errors.price);
-                    }
-                    if ('img' in errors) {
-                        renderError($('#img-new-product'), errors.img);
-                    }
-                }
-
-            }
+            success: () => window.location.hash = '#products'
         });
     });
 
@@ -192,33 +139,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                window.location.hash = '#products';
-            },
-            error: (xhr, status, error) => {
-                $('.alert').remove();
-                if (xhr.status === 401) {
-                    window.location.hash = '#login';
-                    return;
-                }
-
-                if ('errors' in xhr.responseJSON) {
-                    errors = xhr.responseJSON.errors;
-
-                    if ('title' in errors) {
-                        renderError($('#title-product-edit'), errors.title);
-                    }
-                    if ('description' in errors) {
-                        renderError($('#description-product-edit'), errors.description);
-                    }
-                    if ('price' in errors) {
-                        renderError($('#price-product-edit'), errors.price);
-                    }
-                    if ('img' in errors) {
-                        renderError($('#img-product-edit'), errors.img);
-                    }
-                }
-            }
+            success: () => window.location.hash = '#products',
         });
     });
 
@@ -233,22 +154,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: (response) => {
-                addReview($(this).serializeArray());
-            },
-            error: (xhr, status, error) => {
-                $('.alert').remove();
-
-                if ('errors' in xhr.responseJSON) {
-                    errors = xhr.responseJSON.errors;
-                    if ('rating' in errors) {
-                        renderError($('#rating-review-post'), errors.rating);
-                    }
-                    if ('comments' in errors) {
-                        renderError($('#comments-review-post'), errors.comments);
-                    }
-                }
-            }
+            success: () => addReview($(this).serializeArray())
         });
     });
 
@@ -263,15 +169,7 @@ $(document).ready(function () {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                success: (response) => {
-                    this.parentNode.parentNode.remove();
-                },
-                error: (xhr, status, error) => {
-                    if (xhr.status === 401) {
-                        window.location.hash = '#login';
-                        return;
-                    }
-                }
+                success: () => this.parentNode.parentNode.remove()
             });
         }
     );
@@ -289,9 +187,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.cart,
                     dataType: 'json',
-                    success: function (response) {
-                        renderListCart(response.data);
-                    }
+                    success: (response) => renderListCart(response.data)
                 });
                 break;
 
@@ -305,14 +201,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.products,
                     dataType: 'json',
-                    success: function (response) {
-                        renderListProducts(response.data);
-                    },
-                    error: (xhr, status, error) => {
-                        if (xhr.status === 401) {
-                            window.location.hash = '#login';
-                        }
-                    }
+                    success: (response) => renderListProducts(response.data)
                 });
                 break;
 
@@ -328,14 +217,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.products + '/' + productId + '/edit',
                     dataType: 'json',
-                    success: function (response) {
-                        renderProductEdit(response.data);
-                    },
-                    error: (xhr, status, error) => {
-                        if (xhr.status === 401) {
-                            window.location.hash = '#login';
-                        }
-                    }
+                    success: (response) => renderProductEdit(response.data)
                 });
                 break;
 
@@ -345,14 +227,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.orders,
                     dataType: 'json',
-                    success: function (response) {
-                        renderListOrders(response.data);
-                    },
-                    error: (xhr, status, error) => {
-                        if (xhr.status === 401) {
-                            window.location.hash = '#login';
-                        }
-                    }
+                    success: (response) => renderListOrders(response.data)
                 });
                 break;
 
@@ -364,14 +239,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.orders + '/' + orderId,
                     dataType: 'json',
-                    success: function (response) {
-                        renderOrder(response.data);
-                    },
-                    error: (xhr, status, error) => {
-                        if (xhr.status === 401) {
-                            window.location.hash = '#login';
-                        }
-                    }
+                    success: (response) => renderOrder(response.data)
                 });
                 break;
 
@@ -383,9 +251,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.products + '/' + productId,
                     dataType: 'json',
-                    success: function (response) {
-                        renderProduct(response.data);
-                    }
+                    success: (response) => renderProduct(response.data)
                 });
                 break;
 
@@ -395,9 +261,7 @@ $(document).ready(function () {
                 $.ajax({
                     url: config.routes.index,
                     dataType: 'json',
-                    success: function (response) {
-                        renderListIndex(response.data);
-                    }
+                    success: (response) => renderListIndex(response.data)
                 });
                 break;
         }
