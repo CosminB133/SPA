@@ -109,7 +109,7 @@
                     '<a href="#products/' + product.id + '/edit" class="btn btn-primary">' + __('Edit') + '</a>',
                     '<form action="' + config.routes.products + '/'+ product.id + '" class="delete-product">',
                     '<input type="hidden" name="_method" value="DELETE">',
-                    '<button class="btn btn-danger">' + __('RemoveDelete') + '</button>',
+                    '<button class="btn btn-danger">' + __('Remove') + '</button>',
                     '</form>',
                     '</div>',
                     '</div>',

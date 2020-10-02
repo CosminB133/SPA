@@ -37310,7 +37310,7 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function success() {
-        _this.closest('.product').remove();
+        return _this.closest('.product').remove();
       }
     });
   });
@@ -37326,7 +37326,7 @@ $(document).ready(function () {
       processData: false,
       contentType: false,
       success: function success() {
-        _this2.closest('.product').remove();
+        return _this2.closest('.product').remove();
       }
     });
   });
@@ -37340,8 +37340,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        window.location.hash = '#';
+      success: function success() {
+        return window.location.hash = '#';
       }
     });
   });
@@ -37355,8 +37355,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
+      success: function success() {
+        return window.location.hash = '#products';
       }
     });
   });
@@ -37372,8 +37372,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        _this3.parentNode.parentNode.remove();
+      success: function success() {
+        return _this3.parentNode.parentNode.remove();
       }
     });
   });
@@ -37387,8 +37387,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
+      success: function success() {
+        return window.location.hash = '#products';
       }
     });
   });
@@ -37402,8 +37402,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        window.location.hash = '#products';
+      success: function success() {
+        return window.location.hash = '#products';
       }
     });
   });
@@ -37419,8 +37419,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        addReview($(_this4).serializeArray());
+      success: function success() {
+        return addReview($(_this4).serializeArray());
       }
     });
   });
@@ -37436,8 +37436,8 @@ $(document).ready(function () {
       data: new FormData(this),
       processData: false,
       contentType: false,
-      success: function success(response) {
-        _this5.parentNode.parentNode.remove();
+      success: function success() {
+        return _this5.parentNode.parentNode.remove();
       }
     });
   });
@@ -37454,7 +37454,7 @@ $(document).ready(function () {
           url: config.routes.cart,
           dataType: 'json',
           success: function success(response) {
-            renderListCart(response.data);
+            return renderListCart(response.data);
           }
         });
         break;
@@ -37469,12 +37469,7 @@ $(document).ready(function () {
           url: config.routes.products,
           dataType: 'json',
           success: function success(response) {
-            renderListProducts(response.data);
-          },
-          error: function error(xhr, status, _error) {
-            if (xhr.status === 401) {
-              window.location.hash = '#login';
-            }
+            return renderListProducts(response.data);
           }
         });
         break;
@@ -37490,7 +37485,7 @@ $(document).ready(function () {
           url: config.routes.products + '/' + productId + '/edit',
           dataType: 'json',
           success: function success(response) {
-            renderProductEdit(response.data);
+            return renderProductEdit(response.data);
           }
         });
         break;
@@ -37501,7 +37496,7 @@ $(document).ready(function () {
           url: config.routes.orders,
           dataType: 'json',
           success: function success(response) {
-            renderListOrders(response.data);
+            return renderListOrders(response.data);
           }
         });
         break;
@@ -37513,12 +37508,7 @@ $(document).ready(function () {
           url: config.routes.orders + '/' + orderId,
           dataType: 'json',
           success: function success(response) {
-            renderOrder(response.data);
-          },
-          error: function error(xhr, status, _error2) {
-            if (xhr.status === 401) {
-              window.location.hash = '#login';
-            }
+            return renderOrder(response.data);
           }
         });
         break;
@@ -37530,7 +37520,7 @@ $(document).ready(function () {
           url: config.routes.products + '/' + productId,
           dataType: 'json',
           success: function success(response) {
-            renderProduct(response.data);
+            return renderProduct(response.data);
           }
         });
         break;
@@ -37541,7 +37531,7 @@ $(document).ready(function () {
           url: config.routes.index,
           dataType: 'json',
           success: function success(response) {
-            renderListIndex(response.data);
+            return renderListIndex(response.data);
           }
         });
         break;
