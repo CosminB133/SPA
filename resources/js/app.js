@@ -22,14 +22,10 @@ $(document).ready(function () {
     $('form#review-post').attr('action', config.routes.reviews);
 
     $(document).ajaxError(function (event, xhr, settings) {
-        $('.alert').remove();
-
         if (xhr.status === 401) {
             window.location.hash = '#login';
+            return;
         }
-
-        console.log(xhr.responseJSON);
-
 
         if ('errors' in xhr.responseJSON) {
             errors = xhr.responseJSON.errors;
@@ -41,6 +37,7 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form.add-cart', function (event) {
         event.preventDefault();
+        $('.alert').remove();
 
         $.ajax({
             url: $(this).attr('action'),
@@ -55,6 +52,8 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form.remove-cart', function (event) {
         event.preventDefault();
+        $('.alert').remove();
+
         $.ajax({
             url: $(this).attr('action'),
             type: 'POST',
@@ -159,20 +158,19 @@ $(document).ready(function () {
     });
 
     $(document).on('submit', 'form.review-delete', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: () => this.parentNode.parentNode.remove()
-            });
-        }
-    );
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: () => this.parentNode.parentNode.remove()
+        });
+    });
 
     window.onhashchange = function () {
         $('.page').hide();
