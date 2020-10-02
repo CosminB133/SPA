@@ -29,9 +29,9 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-                'name' => 'required',
-                'comments' => 'required',
-                'contact' => 'required',
+            'name' => 'required',
+            'comments' => 'required',
+            'contact' => 'required',
         ]);
 
         if (!$request->session()->get('cart')) {
@@ -44,10 +44,10 @@ class OrderController extends Controller
         $order = new Order();
 
         $order->fill([
-                'name' => $request->input('name'),
-                'comments' => $request->input('comments'),
-                'contact' => $request->input('contact'),
-                'price' => $products->sum('price'),
+            'name' => $request->input('name'),
+            'comments' => $request->input('comments'),
+            'contact' => $request->input('contact'),
+            'price' => $products->sum('price'),
         ]);
 
         $order->save();

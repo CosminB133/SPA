@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="Clean up and changing the models.">
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/spa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/spa.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +193,7 @@
       <workItem from="1601454632890" duration="15184000" />
       <workItem from="1601549362650" duration="17000" />
       <workItem from="1601558398234" duration="5484000" />
-      <workItem from="1601574271883" duration="12079000" />
+      <workItem from="1601574271883" duration="13307000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -379,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601593329698</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Clean up and changing the models.">
+      <created>1601593676421</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1601593676421</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,10 +447,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601469986602" />
-    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601593339450">
+    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601594033252">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601593339450" />
+    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601594033252" />
     <state x="2475" y="255" width="800" height="522" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601469632255" />
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600165171985">
       <screen x="1920" y="0" width="1920" height="1080" />

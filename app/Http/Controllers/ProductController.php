@@ -35,9 +35,9 @@ class ProductController extends Controller
         $product = new Product();
 
         $product->fill([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'price' => $request->input('price'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
         ]);
 
         $product->save();
@@ -60,16 +60,16 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-                'title' => 'required',
-                'description' => 'required',
-                'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-                'img' => 'nullable|mimes:jpg,jpeg,png,gif',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'img' => 'nullable|mimes:jpg,jpeg,png,gif',
         ]);
 
         $product->fill([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'price' => $request->input('price'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
         ]);
 
         $product->save();
