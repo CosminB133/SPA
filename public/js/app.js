@@ -37283,13 +37283,10 @@ $(document).ready(function () {
   $('form#new-product').attr('action', config.routes.products);
   $('form#review-post').attr('action', config.routes.reviews);
   $(document).ajaxError(function (event, xhr, settings) {
-    $('.alert').remove();
-
     if (xhr.status === 401) {
       window.location.hash = '#login';
+      return;
     }
-
-    console.log(xhr.responseJSON);
 
     if ('errors' in xhr.responseJSON) {
       errors = xhr.responseJSON.errors;
@@ -37302,6 +37299,7 @@ $(document).ready(function () {
     var _this = this;
 
     event.preventDefault();
+    $('.alert').remove();
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
@@ -37318,6 +37316,7 @@ $(document).ready(function () {
     var _this2 = this;
 
     event.preventDefault();
+    $('.alert').remove();
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',

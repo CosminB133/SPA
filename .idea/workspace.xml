@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="Code Style">
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/spa.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/spa.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +200,7 @@
       <workItem from="1601642794681" duration="11514000" />
       <workItem from="1601660758242" duration="4226000" />
       <workItem from="1601666350979" duration="1839000" />
-      <workItem from="1601673694523" duration="1411000" />
+      <workItem from="1601673694523" duration="1653000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -419,7 +419,21 @@
       <option name="project" value="LOCAL" />
       <updated>1601674713835</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Code Style">
+      <created>1601675113248</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1601675113248</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Code Style">
+      <created>1601675289335</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1601675289335</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,10 +499,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601469986602" />
-    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601674724816">
+    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601675318978">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601674724816" />
+    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601675318978" />
     <state x="555" y="246" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601629185314" />
     <state x="2475" y="255" width="800" height="522" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601634885294" />
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600165171985">
