@@ -11,55 +11,84 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected $request;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
         $this->middleware('auth')->except('show');
     }
 
     public function index()
     {
-        return ProductResource::collection(Product::all());
+        if ($this->request->ajax()) {
+            return ProductResource::collection(Product::all());
+        }
+        return view('products.index', ['products' => Product::all()]);
+    }
+
+    public function create()
+    {
+        return view('products.create');
     }
 
     public function show(Product $product)
     {
-        $response = new ProductResource($product);
-        $response->withReviews();
+        if ($this->request->ajax()) {
+            $response = new ProductResource($product);
+            $response->withReviews();
 
-        return $response;
+            return $response;
+        }
+
+        return view('products.show', ['product' => $product, 'reviews' => $product->reviews]);
     }
 
-    public function store(ProductRequest $request)
+    public function store()
     {
+        $this->request->validate([
+           'title' => 'required',
+           'description' => 'required',
+           'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+           'img' => 'required|mimes:jpg,jpeg,png,gif',
+       ]);
+
         $product = new Product();
 
         $product->fill([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
+            'title' => $this->request->input('title'),
+            'description' => $this->request->input('description'),
+            'price' => $this->request->input('price'),
         ]);
 
         $product->save();
 
-        $request->file('img')->storeAs('/public/img', $product->id);
+        $this->request->file('img')->storeAs('/public/img', $product->id);
 
-        return response()->json(['message' => 'Success']);
+        if ($this->request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('products.index');
     }
 
 
     public function edit(Product $product)
     {
-        $response = new ProductResource($product);
-        $response->withReviews();
+        if ($this->request->ajax()) {
+            $response = new ProductResource($product);
+            $response->withReviews();
 
-        return $response;
+            return $response;
+        }
+
+        return view('products.edit', ['product' => $product]);
     }
 
 
-    public function update(Request $request, Product $product)
+    public function update(Product $product)
     {
-        $request->validate([
+        $this->request->validate([
             'title' => 'required',
             'description' => 'required',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
@@ -67,15 +96,15 @@ class ProductController extends Controller
         ]);
 
         $product->fill([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
+            'title' => $this->request->input('title'),
+            'description' => $this->request->input('description'),
+            'price' => $this->request->input('price'),
         ]);
 
         $product->save();
 
-        if ($request->file('img')) {
-            $request->file('img')->storeAs('/public/img', $product->id);
+        if ($this->request->file('img')) {
+            $this->request->file('img')->storeAs('/public/img', $product->id);
         }
 
         return response()->json(['message' => 'Success']);
@@ -86,6 +115,10 @@ class ProductController extends Controller
         $product->delete();
         Storage::delete('public/img/' . $product->id);
 
-        return response()->json(['message' => 'Success']);
+        if ($this->request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('products.index');
     }
 }

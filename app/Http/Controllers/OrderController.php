@@ -35,7 +35,11 @@ class OrderController extends Controller
         ]);
 
         if (!$request->session()->get('cart')) {
-            return response()->json(['errors' => ['cart' => 'Cart is empty!']], 422);
+            if ($request->ajax()) {
+                return response()->json(['errors' => ['cart' => 'Cart is empty!']], 422);
+            }
+
+            return redirect()->route('cart.index')->withErrors(['cart' => 'Cart is empty!'])->withInput();
         }
 
         $products = Product::whereIn('id', $request->session()->get('cart'))->get();
@@ -58,14 +62,22 @@ class OrderController extends Controller
 
         Mail::to(config('services.admin.email'))->send(new OrderEmail($order, $products));
 
-        return response()->json(['message' => 'Success']);
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('index');
     }
 
-    public function show(Order $order)
+    public function show(Request $request, Order $order)
     {
-        $response = new OrderResource($order);
-        $response->withProducts();
+        if ($request->ajax()) {
+            $response = new OrderResource($order);
+            $response->withProducts();
 
-        return $response;
+            return $response;
+        }
+
+        return view('orders.show', ['order' => $order, 'products' => $order->products]);
     }
 }

@@ -27,7 +27,7 @@ Route::delete('/cart', 'CartController@destroy')->name('cart.destroy');
 
 Route::resource('/reviews', 'ReviewController')->only(['store', 'destroy']);
 
-Route::resource('/products', 'ProductController')->except('create');
+Route::resource('/products', 'ProductController');
 
 Route::resource('/orders', 'OrderController')->only(['index', 'show', 'store']);
 

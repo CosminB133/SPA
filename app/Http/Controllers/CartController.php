@@ -8,11 +8,15 @@ use App\Product;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $products = session('cart') ? Product::whereIn('id', session('cart'))->get() : [];
 
-        return ProductResource::collection($products);
+        if ($request->ajax()) {
+            return ProductResource::collection($products);
+        }
+
+        return view('cart', ['products' => $products]);
     }
 
     public function store(Request $request)
@@ -30,7 +34,12 @@ class CartController extends Controller
             $request->session()->put('cart', [$request->id]);
         }
 
-        return response()->json(['message' => 'Success']);
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('index');
+
     }
 
     public function destroy(Request $request)
@@ -51,6 +60,10 @@ class CartController extends Controller
         );
         $request->session()->put('cart', $cart);
 
-        return response()->json(['message' => 'Success']);
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Success']);
+        }
+
+        return redirect()->route('cart.index');
     }
 }

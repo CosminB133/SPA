@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $products = session('cart') ? Product::whereNotIn('id', session('cart'))->get() : Product::all();
 
-        return ProductResource::Collection($products);
+        if ($request->ajax()) {
+            return ProductResource::Collection($products);
+        }
+
+        return view('index', ['products' => $products]);
     }
 }
