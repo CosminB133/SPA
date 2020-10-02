@@ -9,19 +9,16 @@ $.ajaxSetup({
 $(document).ready(function () {
 
     $('[data-translate]').each(function () {
-            $(this).text(trans($(this).text()));
-        }
-    );
+        $(this).text(trans($(this).text()));
+    });
 
     $('input[type = "submit"]').each(function () {
-            $(this).attr('value', trans($(this).attr('value')));
-        }
-    );
+        $(this).attr('value', trans($(this).attr('value')));
+    });
 
     $('img').each(function () {
-            $(this).attr('alt', trans($(this).attr('alt')));
-        }
-    );
+        $(this).attr('alt', trans($(this).attr('alt')));
+    });
 
     $('form#login').attr('action', config.routes.login);
     $('form#checkout').attr('action', config.routes.orders);
@@ -29,239 +26,231 @@ $(document).ready(function () {
     $('form#review-post').attr('action', config.routes.reviews);
 
     $(document).on('submit', 'form.add-cart', function (event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: () => {
-                    this.parentNode.parentNode.remove();
-                }
-            });
-        }
-    );
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: () => {
+                this.parentNode.parentNode.remove();
+            }
+        });
+    });
 
     $(document).on('submit', 'form.remove-cart', function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: () => {
-                    this.parentNode.parentNode.remove();
-                }
-            });
-        }
-    );
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: () => {
+                this.parentNode.parentNode.remove();
+            }
+        });
+    });
 
     $(document).on('submit', 'form#checkout', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    window.location.hash = '#';
-                },
-                error: (xhr, status, error) => {
-                    if ('errors' in xhr.responseJSON) {
-                        errors = xhr.responseJSON.errors;
-                        if ('name' in errors) {
-                            renderError($('#name-cart'), errors.name)
-                        }
-                        if ('contact' in errors) {
-                            renderError($('#contact-cart'), errors.contact)
-                        }
-                        if ('comments' in errors) {
-                            renderError($('#comments-cart'), errors.comments)
-                        }
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#';
+            },
+            error: (xhr, status, error) => {
+                if ('errors' in xhr.responseJSON) {
+                    errors = xhr.responseJSON.errors;
+                    if ('name' in errors) {
+                        renderError($('#name-cart'), errors.name)
+                    }
+                    if ('contact' in errors) {
+                        renderError($('#contact-cart'), errors.contact)
+                    }
+                    if ('comments' in errors) {
+                        renderError($('#comments-cart'), errors.comments)
                     }
                 }
-            });
-        }
-    );
+            }
+        });
+    });
 
     $(document).on('submit', 'form#login', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    window.location.hash = '#products';
-                },
-                error: (xhr, status, error) => {
-                    if ('errors' in xhr.responseJSON) {
-                        errors = xhr.responseJSON.errors;
-                        if ('email' in errors) {
-                            renderError($('#email-login'), errors.email);
-                        }
-                        if ('password' in errors) {
-                            renderError($('#password-login'), errors.password);
-                        }
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#products';
+            },
+            error: (xhr, status, error) => {
+                if ('errors' in xhr.responseJSON) {
+                    errors = xhr.responseJSON.errors;
+                    if ('email' in errors) {
+                        renderError($('#email-login'), errors.email);
                     }
-                    $('#password-login').val('');
+                    if ('password' in errors) {
+                        renderError($('#password-login'), errors.password);
+                    }
                 }
-            });
-        }
-    );
+                $('#password-login').val('');
+            }
+        });
+    });
 
     $(document).on('submit', 'form.delete-product', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    this.parentNode.parentNode.remove();
-                },
-                error: (xhr, status, error) => {
-                    if (xhr.status === 401) {
-                        window.location.hash = '#login';
-                        return;
-                    }
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                this.parentNode.parentNode.remove();
+            },
+            error: (xhr, status, error) => {
+                if (xhr.status === 401) {
+                    window.location.hash = '#login';
+                    return;
                 }
-            });
-        }
-    );
+            }
+        });
+    });
 
     $(document).on('submit', 'form#new-product', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    window.location.hash = '#products';
-                },
-                error: (xhr, status, error) => {
-                    $('.alert').remove();
-                    if (xhr.status === 401) {
-                        window.location.hash = '#login';
-                        return;
-                    }
-                    if ('errors' in xhr.responseJSON){
-                        errors = xhr.responseJSON.errors;
-
-                        if ('title' in errors) {
-                            renderError($('#title-new-product'), errors.title);
-                        }
-                        if ('description' in errors) {
-                            renderError($('#description-new-product'), errors.description);
-                        }
-                        if ('price' in errors) {
-                            renderError($('#price-new-product'), errors.price);
-                        }
-                        if ('img' in errors) {
-                            renderError($('#img-new-product'), errors.img);
-                        }
-                    }
-
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#products';
+            },
+            error: (xhr, status, error) => {
+                $('.alert').remove();
+                if (xhr.status === 401) {
+                    window.location.hash = '#login';
+                    return;
                 }
-            });
-        }
-    );
+                if ('errors' in xhr.responseJSON){
+                    errors = xhr.responseJSON.errors;
+
+                    if ('title' in errors) {
+                        renderError($('#title-new-product'), errors.title);
+                    }
+                    if ('description' in errors) {
+                        renderError($('#description-new-product'), errors.description);
+                    }
+                    if ('price' in errors) {
+                        renderError($('#price-new-product'), errors.price);
+                    }
+                    if ('img' in errors) {
+                        renderError($('#img-new-product'), errors.img);
+                    }
+                }
+
+            }
+        });
+    });
 
     $(document).on('submit', 'form#product-edit', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    window.location.hash = '#products';
-                },
-                error: (xhr, status, error) => {
-                    $('.alert').remove();
-                    if (xhr.status === 401) {
-                        window.location.hash = '#login';
-                        return;
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                window.location.hash = '#products';
+            },
+            error: (xhr, status, error) => {
+                $('.alert').remove();
+                if (xhr.status === 401) {
+                    window.location.hash = '#login';
+                    return;
+                }
+
+                if ('errors' in xhr.responseJSON) {
+                    errors = xhr.responseJSON.errors;
+
+                    if ('title' in errors) {
+                        renderError($('#title-product-edit'), errors.title);
                     }
-
-                    if ('errors' in xhr.responseJSON) {
-                        errors = xhr.responseJSON.errors;
-
-                        if ('title' in errors) {
-                            renderError($('#title-product-edit'), errors.title);
-                        }
-                        if ('description' in errors) {
-                            renderError($('#description-product-edit'), errors.description);
-                        }
-                        if ('price' in errors) {
-                            renderError($('#price-product-edit'), errors.price);
-                        }
-                        if ('img' in errors) {
-                            renderError($('#img-product-edit'), errors.img);
-                        }
+                    if ('description' in errors) {
+                        renderError($('#description-product-edit'), errors.description);
+                    }
+                    if ('price' in errors) {
+                        renderError($('#price-product-edit'), errors.price);
+                    }
+                    if ('img' in errors) {
+                        renderError($('#img-product-edit'), errors.img);
                     }
                 }
-            });
-        }
-    );
+            }
+        });
+    });
 
     $(document).on('submit', 'form#review-post', function (event) {
-            event.preventDefault();
-            $('.alert').remove();
+        event.preventDefault();
+        $('.alert').remove();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                dataType: 'json',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: (response) => {
-                    addReview($(this).serializeArray());
-                },
-                error: (xhr, status, error) => {
-                    $('.alert').remove();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'json',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                addReview($(this).serializeArray());
+            },
+            error: (xhr, status, error) => {
+                $('.alert').remove();
 
-                    if ('errors' in xhr.responseJSON) {
-                        errors = xhr.responseJSON.errors;
-                        if ('rating' in errors) {
-                            renderError($('#rating-review-post'), errors.rating);
-                        }
-                        if ('comments' in errors) {
-                            renderError($('#comments-review-post'), errors.comments);
-                        }
+                if ('errors' in xhr.responseJSON) {
+                    errors = xhr.responseJSON.errors;
+                    if ('rating' in errors) {
+                        renderError($('#rating-review-post'), errors.rating);
+                    }
+                    if ('comments' in errors) {
+                        renderError($('#comments-review-post'), errors.comments);
                     }
                 }
-            });
-        }
-    );
+            }
+        });
+    });
 
     $(document).on('submit', 'form.review-delete', function (event) {
             event.preventDefault();

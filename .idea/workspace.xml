@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="Clean up and changing the models.">
+    <list default="true" id="13c2a520-8df7-40d2-86b1-659a968b13ac" name="Default Changelist" comment="Code Style">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +150,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-Training" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -194,6 +195,8 @@
       <workItem from="1601549362650" duration="17000" />
       <workItem from="1601558398234" duration="5484000" />
       <workItem from="1601574271883" duration="13307000" />
+      <workItem from="1601628982581" duration="227000" />
+      <workItem from="1601633196699" duration="1674000" />
     </task>
     <task id="LOCAL-00001" summary="#23: Product http://pm.5psolutions.net/public/index.php?path_info=projects/training-cosmin-barbascu/tasks/23 Used FormData object instead of serialize for sending forms">
       <created>1600864917142</created>
@@ -384,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601593676421</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Code Style">
+      <created>1601629182361</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1601629182363</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,18 +436,20 @@
     <MESSAGE value="Final adjustments" />
     <MESSAGE value="Code Style and changing the controllers" />
     <MESSAGE value="Clean up and changing the models." />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean up and changing the models." />
+    <MESSAGE value="Code Style" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code Style" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1173" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601576677164">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1173" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601576677164" />
-    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl" timestamp="1601574582320">
+    <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl" timestamp="1601629206846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="743" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601574582319" />
     <state x="1072" y="277" width="424" height="478" key="FileChooserDialogImpl/0.0.3840.1040@0.0.3840.1040" timestamp="1600764705201" />
+    <state x="743" y="277" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601629206846" />
     <state x="2663" y="288" width="424" height="478" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601293230523" />
     <state x="2361" y="424" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog" timestamp="1600959901101">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -447,10 +459,11 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="445" key="SwitcherDM/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601469986602" />
-    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601594033252">
+    <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1601629185314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="555" y="246" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601594033252" />
+    <state x="555" y="246" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601629185314" />
     <state x="2475" y="255" width="800" height="522" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601469632255" />
     <state x="2494" y="211" width="762" height="610" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600165171985">
       <screen x="1920" y="0" width="1920" height="1080" />
